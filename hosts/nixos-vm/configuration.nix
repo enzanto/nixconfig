@@ -11,12 +11,12 @@
     ];
 
   # Make ready for Nix flakes
-  nix.package = pkgs.nixFlakes;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix.package = pkgs.nixFlakes;
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
   #VMware setup
   services.xserver.videoDrivers = [ "vmware"];
   virtualisation.vmware.guest.enable = true;
-  
+    
   
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -41,7 +41,11 @@
       keyMap = "no";
   #   useXkbConfig = true; # use xkb.options in tty.
   };
-
+  # set up hyperland
+#  programs.hyprland = {
+#    enable = true;
+#    xwayland.enable = true;
+#  };
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -71,22 +75,23 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.fredrik= {
-     isNormalUser = true;
-     description = "Fredrik Gjellestad";
-     initialPassword = "supersecure";
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       firefox
-  #     tree
-     ];
-   };
+  #users.users.fredrik= {
+   #  isNormalUser = true;
+   #  description = "Fredrik Gjellestad";
+   #  initialPassword = "supersecure";
+   #  extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+   #  packages = with pkgs; [
+   #    firefox
+   #    tree
+   #  ];
+   #};
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
+     neofetch
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -101,6 +106,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  programs.fish.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
