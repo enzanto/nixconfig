@@ -43,7 +43,6 @@
     neovim
     kitty
     wofi
-    vscode
     alacritty
     foot
   ];
