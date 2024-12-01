@@ -7,5 +7,6 @@
         libreoffice
         thunderbird
         firefox
+        discord
       ];
 }

@@ -17,5 +17,6 @@
         ripgrep
         zip
         python3
+        timeshift
     ];
 }
