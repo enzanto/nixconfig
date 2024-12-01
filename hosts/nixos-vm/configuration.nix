@@ -101,6 +101,7 @@
      nodejs
      texliveFull
      texlab
+     vmware-workstation
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -116,7 +117,13 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  programs.fish.enable = true;
+  programs.fish.enable = false;
+  programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+      };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
