@@ -13,14 +13,26 @@ in {
         programs.neovim = {
             enable = true;
             defaultEditor = true;
-            viAlial = true;
+            viAlias = true;
             vimAlias = true;
             extraConfig = ''
-              set number relativenumber autoindent tabstop=4 shiftwidth=4 mouse=a
+                set number relativenumber autoindent tabstop=4 shiftwidth=4 mouse=a
+                noremap <C-e> :NERDTreeToggle <CR>
+                let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
+                let g:UltiSnipsExpandTrigger       = '<Tab>'   
+                let g:UltiSnipsJumpForwardTrigger  = '<Tab>'    
+                let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
               '';
             plugins = with pkgs.vimPlugins; [
                 vimtex
                 nerdtree
+                vim-snippets
+                vim-airline
+                ultisnips
+                nvim-lspconfig
+                nvim-cmp
+                cmp-nvim-lsp
+                gruvbox-nvim
             ];
         };
     };

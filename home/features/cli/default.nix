@@ -3,6 +3,7 @@
         ./fish.nix
         ./fzf.nix
         ./neofetch.nix
+        ./neovim.nix
       ];
     programs.zoxide = {
         enable = true;
@@ -15,5 +16,6 @@
         jq
         ripgrep
         zip
+        python3
     ];
 }

@@ -40,7 +40,6 @@
     # '')
 	cowsay
     git
-    neovim
     kitty
     wofi
     alacritty

@@ -10,8 +10,17 @@ in {
     options.features.desktop.plex.enable = mkEnableOption "enable plex";
 
     config = mkIf cfg.enable {
-        programs.plex-desktop {
-            enable = true;
-        }
+        home.packages = with pkgs; [
+            plex-desktop
+        ];
+        xdg.portal.enable = true;
+        xdg.portal.xdgOpenUsePortal = true;
+        xdg.portal.configPackages = [
+            pkgs.gnome-session
+        ];
+        xdg.portal.extraPortals = [
+            pkgs.xdg-desktop-portal-kde
+            pkgs.xdg-desktop-portal-gtk
+        ];
         };
 }
