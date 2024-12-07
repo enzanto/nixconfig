@@ -8,10 +8,11 @@
   users.users.fredrik = {
     isNormalUser = true;
     description = "Fredrik Gjellestad";
-    initialHashedPassword = "$y$j9T$sk.hKa9B20J30k4Yg.cwo1$kaU2NS3riwrbyTCTSXEdVKihvbLQrLc8YJ1cmc.Ruc6";
+    initialHashedPassword = "$y$j9T$Gb4p4DxTaP21Rkag15wGo.$CfHfE2GMVkIzLU8Xfiuf0o6Cb2QVzOtWALNmljg8LX/";
     extraGroups = [
       "wheel"
       "networkmanager"
+      "docker"
       #"libvirtd" #virtualization
 
     ];
