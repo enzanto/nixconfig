@@ -12,7 +12,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
-      "docker"
+      # "docker" # to use docker without sudo
       #"libvirtd" #virtualization
 
     ];
