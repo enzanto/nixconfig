@@ -38,9 +38,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-	cowsay
+	  cowsay
     git
-    kitty
     wofi
     alacritty
     foot
