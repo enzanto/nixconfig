@@ -63,17 +63,17 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.fredrik= {
-     isNormalUser = true;
-     createHome = true;
-     description = "Fredrik Gjellestad";
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       tree
-     ];
-   };
+  #  users.users.fredrik= {
+  #    isNormalUser = true;
+  #    createHome = true;
+  #    description = "Fredrik Gjellestad";
+  #    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  #    packages = with pkgs; [
+  #      tree
+  #    ];
+  #  };
 
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

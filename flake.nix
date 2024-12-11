@@ -39,12 +39,21 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/nixos-vm ];
         };
+        serenity = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/serenity ];
+        };
       };
       homeConfigurations = {
         "fredrik@nixos-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/fredrik/nixos-vm.nix ];
+        };
+        "fredrik@serenity" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/fredrik/serenity.nix ];
         };
       };
     };
