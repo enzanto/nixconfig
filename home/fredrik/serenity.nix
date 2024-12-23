@@ -14,6 +14,7 @@
         desktop = {
             vscode.enable = true;
             plex.enable = true;
+            hyprland.enable = false;
         };
     };
     }

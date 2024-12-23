@@ -18,5 +18,6 @@
         zip
         python3
         timeshift
+		lshw
     ];
 }

@@ -15,11 +15,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+	hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, home-manager, nixpkgs, ... }@inputs:
+  outputs = { self, home-manager, nixpkgs, hyprland, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
