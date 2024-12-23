@@ -44,6 +44,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/serenity ];
         };
+        coruscant = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/coruscant];
+        };
       };
       homeConfigurations = {
         "fredrik@nixos-vm" = home-manager.lib.homeManagerConfiguration {
@@ -55,6 +59,11 @@
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/fredrik/serenity.nix ];
+        };
+        "fredrik@coruscant" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/fredrik/coruscant.nix ];
         };
       };
     };
