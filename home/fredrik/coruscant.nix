@@ -1,4 +1,4 @@
-{ config, ... }: { imports = [ 
+{ config, pkgs, ... }: { imports = [ 
     ./home.nix 
     ../common
     ../features/cli
@@ -17,5 +17,8 @@
             hyprland.enable = false;
         };
     };
+    home.packages = with pkgs; [
+        tradingview
+    ];
     }
 

@@ -8,6 +8,6 @@
         libreoffice
         thunderbird
         firefox
-        discord
+        vesktop
       ];
 }
