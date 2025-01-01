@@ -17,6 +17,7 @@ in {
                 bbenoist.nix
                 samuelcolvin.jinjahtml
                 oderwat.indent-rainbow
+                james-yu.latex-workshop
             ];
         };
     };

@@ -15,6 +15,7 @@
             vscode.enable = true;
             plex.enable = true;
             hyprland.enable = false;
+            latex.enable = true;
         };
     };
     home.packages = with pkgs; [
