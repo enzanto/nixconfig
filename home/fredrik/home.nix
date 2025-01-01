@@ -38,11 +38,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-	  cowsay
     git
     wofi
-    alacritty
-    foot
     vlc
     insomnia
   ];
@@ -78,7 +75,7 @@
   #  /etc/profiles/per-user/m3tam3re/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
   gtk.enable = true;
 
