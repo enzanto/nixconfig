@@ -133,6 +133,16 @@ in {
                 "window.zoomLevel" = 1.5;
                 "breadcrumbs.enabled" = false;
                 "workbench.activityBar.location" = "hidden";
+                "files.associations" = {
+                    "*.yml" = "yaml";
+                    "*.j2" = "yaml";
+                };
+                "[yaml]" = {
+                    "editor.insertSpaces" = true;
+                    "editor.tabSize" = 2;
+                    "editor.autoIndent" = "advanced";
+                    "diffEditor.ignoreTrimWhitespace" = false;
+                };
             };
             keybindings = [
                 {
