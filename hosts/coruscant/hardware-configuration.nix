@@ -9,7 +9,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "nfs" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
@@ -23,6 +23,10 @@
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+  fileSystems."/mnt/NAS_media" = {
+    device = "192.168.10.11:/mnt/media";
+    fsType = "nfs";
+  };
 
   swapDevices = [ 
     {

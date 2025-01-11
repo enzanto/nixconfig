@@ -137,11 +137,13 @@
   vmware-workstation
   lutris
   vesktop
-  # ciscoPacketTracer8
+  ciscoPacketTracer8
+  open-vm-tools
   ];
   hardware.xone.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  programs.xwayland.enable = true;
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -153,6 +155,15 @@
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       };
 
+  xdg.portal.enable = true;
+        xdg.portal.xdgOpenUsePortal = true;
+        xdg.portal.configPackages = [
+            pkgs.gnome-session
+        ];
+        xdg.portal.extraPortals = [
+            pkgs.xdg-desktop-portal-kde
+            pkgs.xdg-desktop-portal-gtk
+        ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
