@@ -10,5 +10,6 @@
         thunderbird
         firefox
         vesktop
+        yubioath-flutter
       ];
 }
