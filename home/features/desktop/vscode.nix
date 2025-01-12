@@ -20,8 +20,18 @@ in {
                 james-yu.latex-workshop
                 ms-python.python
                 ms-python.vscode-pylance
+                streetsidesoftware.code-spell-checker
+                jnoortheen.nix-ide
             ];
             userSettings = {
+                "nix.serverPath" = "nixd";
+                "nix.enableLanguageServer" = true;
+                "nixpkgs" = {
+                    "expr" = "import <nixpkgs> { }";
+                };
+                "formatting" = { 
+                    "command" = [ "nixpkgs-fmt" ];
+                };
                 "zenMode.hideLineNumbers" = false;
                 "zenMode.centerLayout" = false;
                 "zenMode.showTabs" = "none";

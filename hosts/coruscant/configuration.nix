@@ -136,6 +136,7 @@
   #  wget
   vmware-workstation
   lutris
+  nixd
   vesktop
   ciscoPacketTracer8
   open-vm-tools
