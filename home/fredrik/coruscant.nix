@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: { imports = [ 
+{ 
+    #config, 
+    pkgs, 
+    ... 
+    }: { imports = [ 
     ./home.nix 
     ../common
     ../features/cli
@@ -14,12 +18,14 @@
         desktop = {
             vscode.enable = true;
             plex.enable = true;
-            hyprland.enable = false;
+            hyprland.enable = true;
             latex.enable = true;
+            wireshark.enable=true;
         };
     };
     home.packages = with pkgs; [
         tradingview
+        #7zip    
     ];
     }
 
