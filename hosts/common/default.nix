@@ -7,6 +7,7 @@
 ];
   home-manager = {
     useUserPackages = true;
+    backupFileExtension = "bk";
     extraSpecialArgs = {inherit inputs outputs;};
 };
   nixpkgs = {

@@ -12,6 +12,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "wireshark"
       # "docker" # to use docker without sudo
       #"libvirtd" #virtualization
 
@@ -22,6 +23,10 @@
     ];
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
   };
+  systemd.tmpfiles.rules = [
+  "d /home/fredrik/Downloads 1755 fredrik users 14d" #man pages to fine tune this to avoid accesses time to be considered
+];
+
   home-manager.users.fredrik = 
     import ../../../home/fredrik/${config.networking.hostName}.nix;
 }
