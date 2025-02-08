@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
+  # boot.kernelModules = [ "vmw_pvscsi" "vmw_vmci" "vmmon" "vmnet" "fuse" ];
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
   boot.loader.grub.enable = true;
@@ -70,14 +70,22 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
+  environment.sessionVariables = {
+      WLR_NOHARDWARE_CURSORS = "1";
+      NIXOS_OZONE_WL = "1";
+  };
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
+  # Enable the GNOME Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
+  programs.hyprland.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -92,7 +100,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  #hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -127,20 +135,46 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  virtualisation.vmware.host.enable = true;
+  #set up virtualization
+  users.extraGroups.vmware.members = ["fredrik"];
+  users.extraGroups.vboxusers.members = ["fredrik"];
+  users.extraGroups.wireshark.members = ["fredrik"];
+  programs.wireshark.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.dragAndDrop = true;
+  virtualisation.vmware.host = {
+    enable = true;
+    extraPackages = with pkgs; [ 
+      open-vm-tools
+      ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-  vmware-workstation
+  #vmware-workstation
   lutris
+  wowup-cf
   nixd
   vesktop
   ciscoPacketTracer8
-  open-vm-tools
+  #open-vm-tools
   ];
+
+  systemd.user.services.ciscoPacketTracerWrapper = {
+  description = "Cisco Packet Tracer Wrapper";
+  after = [ "graphical.target" ];
+
+  serviceConfig.ExecStart = "${pkgs.bash}/bin/bash -c 'export GTK_THEME=Breeze && ${pkgs.ciscoPacketTracer8}/bin/PacketTracer'";
+
+  # Optionally, make sure the wrapper is executable
+  install.wantedBy = [ "default.target" ];
+  };
+
   hardware.xone.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
