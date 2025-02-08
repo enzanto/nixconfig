@@ -4,6 +4,7 @@
         ./plex.nix
 		./hyprland.nix
     ./latex.nix
+    ./wireshark.nix
       ];
       home.packages = with pkgs; [
         libreoffice
@@ -11,5 +12,6 @@
         firefox
         vesktop
         yubioath-flutter
+        qalculate-qt
       ];
 }

@@ -18,6 +18,7 @@
         zip
         python3
         timeshift
-		lshw
+        lshw
+        newsboat
     ];
 }
