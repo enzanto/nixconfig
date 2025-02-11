@@ -55,7 +55,7 @@
   programs.hyprland.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  programs.nix-ld.enable = true; #for vscode server
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

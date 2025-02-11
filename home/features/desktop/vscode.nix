@@ -22,6 +22,7 @@ in {
                 ms-python.vscode-pylance
                 streetsidesoftware.code-spell-checker
                 jnoortheen.nix-ide
+                ms-vscode-remote.remote-ssh
             ];
             userSettings = {
                 "nix.serverPath" = "nixd";
