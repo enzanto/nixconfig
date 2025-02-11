@@ -48,6 +48,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/coruscant];
         };
+        razorcrest = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/razorcrest];
+        };
       };
       homeConfigurations = {
         "fredrik@nixos-vm" = home-manager.lib.homeManagerConfiguration {
@@ -64,6 +68,11 @@
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/fredrik/coruscant.nix ];
+        };
+        "fredrik@razorcrest" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/fredrik/razorcrest.nix ];
         };
       };
     };

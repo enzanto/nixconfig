@@ -7,6 +7,7 @@
 }:
 with lib; let
     cfg = config.features.desktop.hyprland;
+    hostname = builtins.getEnv "HOSTNAME";
 in {
     options.features.desktop.hyprland.enable = mkEnableOption "enable hyprland";
 
@@ -36,7 +37,7 @@ in {
                 "hyprpaper &"
                 "hypridle &"
             ];
-            monitor = [
+            monitor = mkIf (hostname == "coruscant") [
                 "HDMI-A-1,1920x1080,-1080x-138,1,transform,1"
                 "DP-2,2560x1440@143.91,0x0,1"
                 "HDMI-A-2, 1920x1080,2560x250,1"
