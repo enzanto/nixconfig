@@ -60,9 +60,19 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  nixd
+  pavucontrol
   #  wget
   ];
-
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.jetbrains-mono
+    font-awesome
+  ];
+  environment.variables = {
+    XDG_PICTURES_DIR = "$HOME/Pictures";
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
