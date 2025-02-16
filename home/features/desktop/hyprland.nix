@@ -24,11 +24,29 @@ in {
         settings = {
             "$mod" = "SUPER";
             "$menu" = "wofi --show drun";
+            decoration = {
+                active_opacity = 0.85;
+                inactive_opacity = 0.85;
+                blur = {
+                    enabled = true;
+                    size = 2;
+                    passes = 2;
+                };
+            };
             exec-once = [
                 "waybar &"
-                #"hyprpaper &"
+                "hyprpaper &"
+                "hyprlock -c /home/fredrik/.config/hypr/hyprlock-init.conf &"
                 "hypridle &"
             ];
+            general.layout = "master";
+            master = {
+                mfact = 0.70;
+            };
+            misc = {
+                disable_hyprland_logo=true;
+                disable_splash_rendering=true;
+            };
             monitor = hostConfig.monitor;# or "";
             # monitor = [
             #     "eDP-1, 1920x1080,0x0,1"
@@ -38,9 +56,11 @@ in {
                 "$mod, F, exec, firefox"
                 "$mod, t, exec, kitty"
                 "$mod, RETURN, exec, $menu"
+                "$mod, L, exec, hyprlock"
                 "$mod, Q, killactive"
                 "$mod, c, exec, code"
-                "$mod, p, exec waypaper --folder /home/fredrik/Pictures/wallpapers" #needs more setup!
+                "$mod, e, exec, thunar"
+                "$mod, p, exec, waypaper --folder /home/fredrik/Pictures/wallpapers" #needs more setup!
                 "$mod, left, movefocus, l "                                         # Focus left window
                 "$mod, right, movefocus, r"                                         # Focus right window
                 "$mod, up, movefocus, u   "                                         # Focus window above
@@ -75,7 +95,7 @@ in {
                 "$mod SHIFT, 0, movetoworkspace, 10"
 
                 # Screenshots
-                ", Print, exec, ${lib.getExe pkgs.hyprshot} --mode output -o $XDG_PICTURES_DIR/screenshots"# --raw | ${lib.getExe pkgs.satty} --filename -"
+                ", Print, exec, ${lib.getExe pkgs.hyprshot} full --mode output -o $XDG_PICTURES_DIR/screenshots"# --raw | ${lib.getExe pkgs.satty} --filename -"
                 "SHIFT, Print, exec, ${lib.getExe pkgs.hyprshot} --mode window --raw | ${lib.getExe pkgs.satty} --filename -"
                 "$mod SHIFT, Print, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
                 "ALT, Print, exec, ${lib.getExe pkgs.hyprshot} --mode region --raw | ${lib.getExe pkgs.satty} --filename -"
@@ -103,6 +123,80 @@ in {
             };
         };
 		};
+        services = { 
+            hyprpaper = {
+            enable = true;
+            settings = {
+                ipc = "on";
+                splash = false;
+                splash_offset = 2.0;
+
+                preload =
+                    [ "/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg" ];
+
+                wallpaper = [
+                    "eDP-1,/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg"];
+            };
+        };
+            hypridle = {
+                enable = true;
+                settings = {
+                      general = {
+                        after_sleep_cmd = "hyprctl dispatch dpms on";
+                        before_sleep_cmd = "hyprlock -c /home/fredrik/.config/hypr/hyprlock-init.conf";
+                        ignore_dbus_inhibit = false;
+                        lock_cmd = "hyprlock";
+                    };
+
+                    listener = [
+                        {
+                        timeout = 30;
+                        on-timeout = "hyprlock";
+                        }
+                        {
+                        timeout = 300;
+                        on-timeout = "hyprctl dispatch dpms off";
+                        on-resume = "hyprctl dispatch dpms on";
+                        }
+                    ];
+                };
+            };
+        };
+        programs.hyprlock = {
+            enable = true;
+            settings = {
+                general = {
+    disable_loading_bar = true;
+    grace = 30;
+    hide_cursor = true;
+    no_fade_in = false;
+  };
+
+  background = [
+    {
+      path = "screenshot";
+      blur_passes = 3;
+      blur_size = 5;
+    }
+  ];
+
+  input-field = [
+    {
+      size = "200, 50";
+      position = "0, -250";
+      monitor = "";
+      dots_center = true;
+      fade_on_empty = true;
+      font_color = "rgb(202, 211, 245)";
+      inner_color = "rgb(91, 96, 120)";
+      outer_color = "rgb(24, 25, 38)";
+      outline_thickness = 5;
+      placeholder_text = "Password";
+      shadow_passes = 2;
+    }
+  ];  
+            };
+        };
         home.packages = with pkgs; [
             brightnessctl
             kitty
@@ -111,6 +205,7 @@ in {
             hyprpaper
             hyprshot
             satty
+            xfce.thunar
             waypaper
             #waybar
             wofi

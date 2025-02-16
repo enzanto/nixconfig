@@ -60,10 +60,11 @@
         };
 
         "bluetooth" = {
-          
+          on-click = "blueman-applet";
         };
 
         "battery" = {
+          #bat = "BAT0";
           states = {
             warning = 30;
             critical = 1;
