@@ -65,6 +65,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   nixd
   pavucontrol
+  konsole
   #  wget
   ];
   fonts.packages = with pkgs; [
@@ -88,6 +89,18 @@
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+
+
+  xdg.portal.enable = true;
+        xdg.portal.xdgOpenUsePortal = true;
+        xdg.portal.configPackages = [
+            pkgs.gnome-session
+        ];
+        xdg.portal.extraPortals = [
+            pkgs.xdg-desktop-portal-kde
+            pkgs.xdg-desktop-portal-gtk
+        ];
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

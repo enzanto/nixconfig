@@ -1,5 +1,6 @@
 { 
     #config, 
+    pkgs,
     ... 
     }: { imports = [ 
     ./home.nix 
@@ -16,7 +17,7 @@
         };
         desktop = {
             vscode.enable = true;
-            plex.enable = false;
+            plex.enable = true;
             hyprland.enable = true;
             latex.enable = true;
             wireshark.enable = true;
@@ -29,6 +30,9 @@
         Hyprland
       fi
     '';
-  };
+      };
+    home.packages = with pkgs; [
+      networkmanagerapplet
+    ];
     }
 

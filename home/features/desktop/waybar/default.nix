@@ -9,7 +9,7 @@
         height = 30;
         modules-left = ["hyprland/workspaces"];
         modules-center = ["hyprland/window"];
-        modules-right = [ "custom/weather" "pulseaudio" "battery" "clock" "bluetooth" "tray"];
+        modules-right = [ "custom/weather" "pulseaudio" "battery" "clock" "network" "bluetooth" "tray"];
         "hyprland/workspaces" = {
           disable-scroll = true;
           show-special = true;
@@ -78,6 +78,15 @@
         "clock" = {
           format = "{:%d.%m.%Y - %H:%M}";
           format-alt = "{:%A, %B %d at %R}";
+        };
+
+        "network" = {
+        format-wifi = "wifi {bandwidthDownBits}";
+        format-ethernet= "enth {bandwidthDownBits}";
+        format-disconnected = "no network";
+        interval= 5;
+        tooltip= false;
+        on-click = "nm-applet";
         };
 
         "tray" = {

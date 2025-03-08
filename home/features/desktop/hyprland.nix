@@ -54,7 +54,7 @@ in {
 
             bind = [
                 "$mod, F, exec, firefox"
-                "$mod, t, exec, kitty"
+                "$mod, t, exec, konsole"
                 "$mod, RETURN, exec, $menu"
                 "$mod, L, exec, hyprlock"
                 "$mod, Q, killactive"
