@@ -1,9 +1,11 @@
-{ pkgs, ...}: {
+{ pkgs, inputs,...}: {
       imports = [
         ./fish.nix
         ./fzf.nix
         ./neofetch.nix
         ./neovim.nix
+        ./nixvim.nix
+        inputs.nixvim.homeManagerModules.nixvim
       ];
     programs.zoxide = {
         enable = true;
