@@ -38,6 +38,7 @@ in {
                 "zenMode.centerLayout" = false;
                 "zenMode.showTabs" = "none";
                 "editor.minimap.enabled" = false;
+                "editor.lineNumbers" = "relative";
                 # vim settings
                 "vim.leader" = "<space>";
                 "vim.normalModeKeyBindingsNonRecursive" = [

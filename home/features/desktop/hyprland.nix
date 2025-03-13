@@ -93,6 +93,10 @@ in {
                 "$mod SHIFT, 8, movetoworkspace, 8"
                 "$mod SHIFT, 9, movetoworkspace, 9"
                 "$mod SHIFT, 0, movetoworkspace, 10"
+                "$mod SHIFT CTRL, left, movetoworkspace, -1"
+                "$mod SHIFT CTRL, right, movetoworkspace, +1"
+                "$mod CTRL, left, workspace, -1"
+                "$mod CTRL, right, workspace, +1"
 
                 # Screenshots
                 ", Print, exec, ${lib.getExe pkgs.hyprshot} full --mode output -o $XDG_PICTURES_DIR/screenshots"# --raw | ${lib.getExe pkgs.satty} --filename -"
@@ -124,20 +128,7 @@ in {
         };
 		};
         services = { 
-            hyprpaper = {
-            enable = true;
-            settings = {
-                ipc = "on";
-                splash = false;
-                splash_offset = 2.0;
-
-                preload =
-                    [ "/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg" ];
-
-                wallpaper = [
-                    "eDP-1,/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg"];
-            };
-        };
+            hyprpaper = hostConfig.hyprpaper;
             hypridle = {
                 enable = true;
                 settings = {
@@ -150,11 +141,11 @@ in {
 
                     listener = [
                         {
-                        timeout = 30;
+                        timeout = 300;
                         on-timeout = "hyprlock";
                         }
                         {
-                        timeout = 300;
+                        timeout = 600;
                         on-timeout = "hyprctl dispatch dpms off";
                         on-resume = "hyprctl dispatch dpms on";
                         }
@@ -174,7 +165,7 @@ in {
 
   background = [
     {
-      path = "screenshot";
+      path = "/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg";
       blur_passes = 3;
       blur_size = 5;
     }

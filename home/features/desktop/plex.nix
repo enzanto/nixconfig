@@ -19,7 +19,7 @@ in {
             pkgs.gnome-session
         ];
         xdg.portal.extraPortals = [
-            pkgs.xdg-desktop-portal-kde
+            pkgs.kdePackages.xdg-desktop-portal-kde
             pkgs.xdg-desktop-portal-gtk
         ];
         };
