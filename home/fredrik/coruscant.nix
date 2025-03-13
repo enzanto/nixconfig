@@ -14,6 +14,7 @@
             fzf.enable = true;
             neofetch.enable = true;
             neovim.enable=true;
+            nixvim.enable=false;
         };
         desktop = {
             vscode.enable = true;
@@ -27,5 +28,12 @@
         tradingview
         #7zip    
     ];
+      programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+    export EDITOR=nvim
+    curl wttr.in/Bergen?format=3
+    '';
+      };
     }
 

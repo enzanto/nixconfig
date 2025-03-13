@@ -75,7 +75,7 @@
       NIXOS_OZONE_WL = "1";
   };
   # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  services.xserver.enable = true;
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
@@ -86,6 +86,8 @@
   services.desktopManager.plasma6.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
+  programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -100,7 +102,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  #hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -108,7 +110,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -161,19 +163,17 @@
   wowup-cf
   nixd
   vesktop
-  ciscoPacketTracer8
+  #ciscoPacketTracer8
+  qt6.qtwayland 
+  zmusic
+  #gzdoom
+  #openal
   #open-vm-tools
   ];
-
-  systemd.user.services.ciscoPacketTracerWrapper = {
-  description = "Cisco Packet Tracer Wrapper";
-  after = [ "graphical.target" ];
-
-  serviceConfig.ExecStart = "${pkgs.bash}/bin/bash -c 'export GTK_THEME=Breeze && ${pkgs.ciscoPacketTracer8}/bin/PacketTracer'";
-
-  # Optionally, make sure the wrapper is executable
-  install.wantedBy = [ "default.target" ];
-  };
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+  ];
 
   hardware.xone.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
@@ -189,16 +189,24 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       };
-
-  xdg.portal.enable = true;
-        xdg.portal.xdgOpenUsePortal = true;
-        xdg.portal.configPackages = [
+xdg ={
+  portal = {
+  enable = true;
+  xdgOpenUsePortal = true;
+  config = {
+    common.default = ["gtk"];
+    hyprland.default = ["gtk" "hyprland"];
+  };
+  configPackages = [
             pkgs.gnome-session
         ];
-        xdg.portal.extraPortals = [
-            pkgs.xdg-desktop-portal-kde
+  extraPortals = [
+            pkgs.kdePackages.xdg-desktop-portal-kde
             pkgs.xdg-desktop-portal-gtk
+            pkgs.xdg-desktop-portal-hyprland
         ];
+  };
+};
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -212,6 +220,7 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.pcscd.enable = true;
+  services.blueman.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
