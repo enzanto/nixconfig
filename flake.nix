@@ -15,12 +15,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-	hyprland.url = "github:hyprwm/Hyprland";
+    nixvim = {
+        url = "github:nix-community/nixvim";
+        # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+	  hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, home-manager, nixpkgs, hyprland, ... }@inputs:
+  outputs = { self, home-manager, nixpkgs, hyprland, nixvim, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
