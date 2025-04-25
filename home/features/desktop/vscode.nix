@@ -27,6 +27,7 @@ in {
             userSettings = {
                 "nix.serverPath" = "nixd";
                 "git.autifetch" = true;
+                "git.enableCommitSigning" = true;
                 "nix.enableLanguageServer" = true;
                 "nixpkgs" = {
                     "expr" = "import <nixpkgs> { }";
