@@ -22,5 +22,6 @@
         timeshift
         lshw
         newsboat
+        xclip
     ];
 }

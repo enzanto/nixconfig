@@ -78,6 +78,14 @@
     EDITOR = "nvim";
   };
   gtk.enable = true;
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+    export EDITOR=nvim
+    alias kube="nix develop self#kube"
+    alias clip="xclip -sel clip"
+    '';
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
