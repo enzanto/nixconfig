@@ -80,5 +80,29 @@
           modules = [ ./home/fredrik/razorcrest.nix ];
         };
       };
+        devShells = forAllSystems (system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in {
+          kube = pkgs.mkShell {
+            name = "kube-dev-shell";
+
+            packages = [
+              (pkgs.python3.withPackages (python-pkgs: [
+                python-pkgs.openshift
+                python-pkgs.kubernetes
+                python-pkgs.pyyaml
+              ]))
+              pkgs.kubectl
+              pkgs.k9s
+              pkgs.ansible
+              pkgs.kubernetes-helm
+            ];
+
+            shellHook = ''
+              echo "🔧 Kubernetes dev shell ready for ${system}"
+            '';
+          };
+        });
     };
 }
