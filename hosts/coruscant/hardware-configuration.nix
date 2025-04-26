@@ -10,7 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "nfs" ];
-  boot.kernelModules = [ "kvm-intel" ];
+  #boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -23,6 +23,12 @@
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+
+  fileSystems."/home/fredrik/virtualMachines" =
+    { device = "/dev/disk/by-uuid/89450abf-180f-43db-ab6b-09ba5f0aafe2";
+      fsType = "xfs";
+    };
+
   fileSystems."/mnt/NAS_media" = {
     device = "192.168.10.11:/mnt/media";
     fsType = "nfs";
