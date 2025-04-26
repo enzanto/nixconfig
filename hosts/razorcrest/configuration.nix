@@ -31,6 +31,7 @@
   services = {
     blueman.enable = true;
     getty.autologinUser = "fredrik";
+    jotta-cli.enable = true;
     openssh.enable = true;
     pcscd.enable = true; #needed for yubikey
     pipewire = {
@@ -66,6 +67,10 @@
   nixd
   pavucontrol
   konsole
+  gnupg
+  pinentry-qt
+  yubikey-personalization
+  yubikey-manager
   #  wget
   ];
   fonts.packages = with pkgs; [
@@ -76,6 +81,11 @@
   ];
   environment.variables = {
     XDG_PICTURES_DIR = "$HOME/Pictures";
+  };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-qt;
   };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
