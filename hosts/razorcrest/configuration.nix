@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./wireguard.nix
     ];
 
   # Bootloader.
@@ -65,7 +66,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   nixd
   pavucontrol
-  konsole
+  kdePackages.konsole
   #  wget
   ];
   fonts.packages = with pkgs; [
@@ -97,7 +98,7 @@
             pkgs.gnome-session
         ];
         xdg.portal.extraPortals = [
-            pkgs.xdg-desktop-portal-kde
+            pkgs.kdePackages.xdg-desktop-portal-kde
             pkgs.xdg-desktop-portal-gtk
         ];
 
