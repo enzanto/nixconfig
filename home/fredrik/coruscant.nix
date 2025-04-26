@@ -26,14 +26,6 @@
     };
     home.packages = with pkgs; [
         tradingview
-        #7zip    
     ];
-      programs.bash = {
-    enable = true;
-    bashrcExtra = ''
-    export EDITOR=nvim
-    curl wttr.in/Bergen?format=3
-    '';
-      };
     }
 
