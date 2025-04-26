@@ -27,6 +27,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [ 11434 80 443];
 
   # Enable OpenGL
   hardware.graphics = {
@@ -135,10 +136,13 @@
 
   # Install firefox.
 
+  services.jotta-cli = {
+    enable = true;
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #set up virtualization
-  users.extraGroups.vmware.members = ["fredrik"];
+  #users.extraGroups.vmware.members = ["fredrik"];
   users.extraGroups.vboxusers.members = ["fredrik"];
   users.extraGroups.wireshark.members = ["fredrik"];
   programs.wireshark.enable = true;
@@ -146,12 +150,22 @@
   virtualisation.virtualbox.host.enableExtensionPack = true;
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.virtualbox.guest.dragAndDrop = true;
-  virtualisation.vmware.host = {
+  virtualisation.docker = {
     enable = true;
-    extraPackages = with pkgs; [ 
-      open-vm-tools
-      ];
+    package = pkgs.docker.override {buildxSupport = true;};
+    daemon.settings.features.cdi = true;
   };
+    boot.binfmt.emulatedSystems = [
+    "aarch64-linux"  # ARM 64-bit
+    "armv7l-linux"   # ARM 32-bit
+  ];
+  # virtualisation.vmware.host = {
+  #   enable = true;
+  #   package = pkgs.vmware-workstation;
+  #   extraPackages = with pkgs; [ 
+  #     open-vm-tools
+  #     ];
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -163,18 +177,30 @@
   wowup-cf
   nixd
   vesktop
-  #ciscoPacketTracer8
+  libxfs
+  ciscoPacketTracer8
   qt6.qtwayland 
   zmusic
-  #gzdoom
-  #openal
-  #open-vm-tools
+  qt5.qtbase
+  qt5.qtwayland
+  gcc
+  docker-buildx
+  qemu
+  qemu-user
+  qemu_full
+  gnupg
+  pinentry-qt
+  paperkey
+  yubikey-personalization
+  yubikey-manager
+
+
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono
   ];
-
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.xone.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
@@ -189,6 +215,11 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry.qt;
+  };
 xdg ={
   portal = {
   enable = true;

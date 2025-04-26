@@ -13,7 +13,7 @@
       "wheel"
       "networkmanager"
       "wireshark"
-      # "docker" # to use docker without sudo
+      "docker" # to use docker without sudo
       #"libvirtd" #virtualization
 
     ];
