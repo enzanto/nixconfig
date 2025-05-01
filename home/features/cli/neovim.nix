@@ -15,17 +15,24 @@ in {
             defaultEditor = true;
             viAlias = true;
             vimAlias = true;
-            extraConfig = ''
-                set number relativenumber autoindent tabstop=4 shiftwidth=4 mouse=a 
-                filetype plugin indent on
-                syntax enable
-                noremap <C-e> :NERDTreeToggle <CR>
-                noremap <C-s> :w <CR>
-                let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
-                let g:UltiSnipsExpandTrigger       = '<Tab>'   
-                let g:UltiSnipsJumpForwardTrigger  = '<Tab>'    
-                let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
-              '';
+            extraLuaConfig = ''
+                vim.opt.number = true
+                vim.opt.relativenumber = true
+                vim.opt.autoindent = true
+                vim.opt.tabstop = 4
+                vim.opt.shiftwidth = 4
+                vim.opt.mouse = "a"
+                vim.opt.spell = true
+                vim.opt.spelllang = "en_us"
+
+                vim.keymap.set('n', '<C-e>', ':NERDTreeToggle<CR>')
+                vim.keymap.set('n', '<C-s>', ':w<CR>')
+
+                vim.g.UltiSnipsSnippetDirectories = { vim.env.HOME .. '/.config/nvim/UltiSnips' }
+                vim.g.UltiSnipsExpandTrigger = '<Tab>'
+                vim.g.UltiSnipsJumpForwardTrigger = '<Tab>'
+                vim.g.UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+            '';
             plugins = with pkgs.vimPlugins; [
                 vimtex
                 nerdtree
