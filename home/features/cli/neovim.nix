@@ -16,6 +16,7 @@ in {
             viAlias = true;
             vimAlias = true;
             extraLuaConfig = ''
+                vim.g.maplocalleader = " "
                 vim.opt.number = true
                 vim.opt.relativenumber = true
                 vim.opt.autoindent = true
@@ -26,12 +27,15 @@ in {
                 vim.opt.spelllang = "en_us"
 
                 vim.keymap.set('n', '<C-e>', ':NERDTreeToggle<CR>')
-                vim.keymap.set('n', '<C-s>', ':w<CR>')
+                vim.keymap.set('n', '<localleader>w', ':w<CR>')
+
+                vim.keymap.set({'n','v'}, '<localleader>c', ':CommentToggle<CR>')
 
                 vim.g.UltiSnipsSnippetDirectories = { vim.env.HOME .. '/.config/nvim/UltiSnips' }
                 vim.g.UltiSnipsExpandTrigger = '<Tab>'
                 vim.g.UltiSnipsJumpForwardTrigger = '<Tab>'
                 vim.g.UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+                require('nvim_comment').setup()
             '';
             plugins = with pkgs.vimPlugins; [
                 vimtex
@@ -44,6 +48,7 @@ in {
                 cmp-nvim-lsp
                 cmp-buffer
                 gruvbox-nvim
+                nvim-comment
             ];
         };
     };
