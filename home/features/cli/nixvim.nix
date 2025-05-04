@@ -10,6 +10,9 @@ in {
   options.features.cli.nixvim.enable = mkEnableOption "Enables nixvim";
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      alejandra
+    ];
     programs.nixvim = {
       enable = true;
       colorschemes.gruvbox.enable = true;
@@ -36,22 +39,26 @@ in {
         spell = true;
       };
       keymaps = [
-        { # writing file
+        {
+          # writing file
           action = "<cmd>:w<cr>";
           key = "<leader>w";
         }
-        { # comment toggle
+        {
+          # comment toggle
           action = ":CommentToggle<cr>";
           key = "<leader>c";
         }
-		{ # tree toggle
-			action = "<cmd>:NvimTreeToggle<cr>";
-			key = "<leader>e";
-		}
-		{ # stage hunk
-			action = "<cmd>:Gitsigns stage_hunk<cr>";
-			key = "<leader>hs";
-		}
+        {
+          # tree toggle
+          action = "<cmd>:NvimTreeToggle<cr>";
+          key = "<leader>e";
+        }
+        {
+          # stage hunk
+          action = "<cmd>:Gitsigns stage_hunk<cr>";
+          key = "<leader>hs";
+        }
       ];
       plugins = {
         cmp = {
@@ -63,8 +70,21 @@ in {
             {name = "buffer";}
           ];
         };
-		fugitive.enable = true;
-		gitsigns.enable = true;
+        conform-nvim = {
+          enable = true;
+          settings = {
+            format_on_save = {
+              lspFallback = true;
+              timeoutMs = 500;
+            };
+            notify_on_error = true;
+            formatters_by_ft = {
+              nix = ["alejandra"];
+            };
+          };
+        };
+        fugitive.enable = true;
+        gitsigns.enable = true;
         lsp = {
           enable = true;
           servers = {
@@ -75,35 +95,37 @@ in {
           };
         };
         lualine.enable = true;
-		nvim-autopairs.enable = true;
-		nvim-tree = {
-			enable = true;
-			actions.openFile.quitOnOpen = true;
-		};
-		rainbow-delimiters.enable = true;
-		treesitter = {
-		enable = true;
-		folding = true;
-		# settings.indent = true;
-		settings.highlight.enable = true;
-		};
-		telescope.enable = true;
-		treesitter-textobjects.enable = true;
+        nvim-autopairs.enable = true;
+        nvim-tree = {
+          enable = true;
+          actions.openFile.quitOnOpen = true;
+        };
+        rainbow-delimiters.enable = true;
+        treesitter = {
+          enable = true;
+          folding = true;
+          # settings.indent = true;
+          settings.highlight.enable = true;
+        };
+        telescope.enable = true;
+        treesitter-textobjects.enable = true;
         vimtex.enable = true;
       };
       extraPlugins = with pkgs.vimPlugins; [
-        { # nvim comment with config
+        {
+          # nvim comment with config
           plugin = nvim-comment;
           config = ''lua require("nvim_comment").setup()'';
         }
-		{ #semshi python highlighter
-			plugin = pkgs.fetchFromGitHub {
-				owner = "wookayin";
-				repo = "semshi";
-				rev = "v0.3.0";
-				sha256 = "sha256-gQy8rQBTzODp8OfnHdggxSq275/9T8feJAkWzH+CdvU=";
-			};
-		}
+        {
+          #semshi python highlighter
+          plugin = pkgs.fetchFromGitHub {
+            owner = "wookayin";
+            repo = "semshi";
+            rev = "v0.3.0";
+            sha256 = "sha256-gQy8rQBTzODp8OfnHdggxSq275/9T8feJAkWzH+CdvU=";
+          };
+        }
         UltiSnips
       ];
     };
