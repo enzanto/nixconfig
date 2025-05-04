@@ -65,6 +65,7 @@ in {
           };
         };
         lualine.enable = true;
+		nvim-autopairs.enable = true;
 		treesitter = {
 		enable = true;
 		folding = true;
