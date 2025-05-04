@@ -44,6 +44,10 @@ in {
           action = ":CommentToggle<cr>";
           key = "<leader>c";
         }
+		{
+			action = "<cmd>:NvimTreeToggle<cr>";
+			key = "<leader>e";
+		}
       ];
       plugins = {
         cmp = {
@@ -66,6 +70,10 @@ in {
         };
         lualine.enable = true;
 		nvim-autopairs.enable = true;
+		nvim-tree = {
+			enable = true;
+			actions.openFile.quitOnOpen = true;
+		};
 		treesitter = {
 		enable = true;
 		folding = true;
