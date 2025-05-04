@@ -74,6 +74,7 @@ in {
 			enable = true;
 			actions.openFile.quitOnOpen = true;
 		};
+		rainbow-delimiters.enable = true;
 		treesitter = {
 		enable = true;
 		folding = true;
