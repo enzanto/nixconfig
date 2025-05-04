@@ -18,9 +18,6 @@ in {
       viAlias = true;
       vimAlias = true;
       # extraConfig = ''
-      #     set number relativenumber autoindent tabstop=4 shiftwidth=4 mouse=a
-      #     filetype plugin indent on
-      #     syntax enable
       #     noremap <C-e> :NERDTreeToggle <CR>
       #     let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
       #     let g:UltiSnipsExpandTrigger       = '<Tab>'
@@ -72,21 +69,17 @@ in {
 		enable = true;
 		folding = true;
 		# settings.indent = true;
-		settings.highlight = {
-			enable = true;
+		settings.highlight.enable = true;
 		};
-		};
-		# treesitter.enable = true;
-		# treesitter.folding = true;
 		treesitter-textobjects.enable = true;
         vimtex.enable = true;
       };
       extraPlugins = with pkgs.vimPlugins; [
-        {
+        { # nvim comment with config
           plugin = nvim-comment;
           config = ''lua require("nvim_comment").setup()'';
         }
-		{
+		{ #semshi python highlighter
 			plugin = pkgs.fetchFromGitHub {
 				owner = "wookayin";
 				repo = "semshi";
