@@ -59,6 +59,8 @@ in {
             {name = "buffer";}
           ];
         };
+		fugitive.enable = true;
+		gitsigns.enable = true;
         lsp = {
           enable = true;
           servers = {
@@ -81,6 +83,7 @@ in {
 		# settings.indent = true;
 		settings.highlight.enable = true;
 		};
+		telescope.enable = true;
 		treesitter-textobjects.enable = true;
         vimtex.enable = true;
       };
