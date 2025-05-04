@@ -36,17 +36,21 @@ in {
         spell = true;
       };
       keymaps = [
-        {
+        { # writing file
           action = "<cmd>:w<cr>";
           key = "<leader>w";
         }
-        {
+        { # comment toggle
           action = ":CommentToggle<cr>";
           key = "<leader>c";
         }
-		{
+		{ # tree toggle
 			action = "<cmd>:NvimTreeToggle<cr>";
 			key = "<leader>e";
+		}
+		{ # stage hunk
+			action = "<cmd>:Gitsigns stage_hunk<cr>";
+			key = "<leader>hs";
 		}
       ];
       plugins = {
