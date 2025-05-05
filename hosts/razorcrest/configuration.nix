@@ -67,7 +67,6 @@
   nixd
   pavucontrol
   kdePackages.konsole
-  konsole
   gnupg
   pinentry-qt
   yubikey-personalization
