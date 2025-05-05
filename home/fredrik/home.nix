@@ -83,7 +83,7 @@
     bashrcExtra = ''
     export EDITOR=nvim
     alias kube="nix develop self#kube"
-    alias clip="xclip -sel clip"
+    alias clip="wl-copy"
     '';
   };
 
