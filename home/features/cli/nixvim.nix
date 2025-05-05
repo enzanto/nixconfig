@@ -109,7 +109,10 @@ in {
         };
         telescope.enable = true;
         treesitter-textobjects.enable = true;
-        vimtex.enable = true;
+        vimtex = {
+          enable = true;
+          texlivePackage = pkgs.texlive.combined.scheme-full;
+        };
       };
       extraPlugins = with pkgs.vimPlugins; [
         {
