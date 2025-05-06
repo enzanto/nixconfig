@@ -13,7 +13,8 @@
             fish.enable = true;
             fzf.enable = true;
             neofetch.enable = true;
-            neovim.enable=true;
+            neovim.enable=false;
+            nixvim.enable=true;
         };
         desktop = {
             vscode.enable = true;

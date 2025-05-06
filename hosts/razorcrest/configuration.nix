@@ -66,7 +66,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   nixd
   pavucontrol
-  konsole
+  kdePackages.konsole
   gnupg
   pinentry-qt
   yubikey-personalization
@@ -107,7 +107,7 @@
             pkgs.gnome-session
         ];
         xdg.portal.extraPortals = [
-            pkgs.xdg-desktop-portal-kde
+            pkgs.kdePackages.xdg-desktop-portal-kde
             pkgs.xdg-desktop-portal-gtk
         ];
 
