@@ -16,93 +16,98 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-        url = "github:nix-community/nixvim";
-        # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-	  hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
-  outputs = { self, home-manager, nixpkgs, hyprland, nixvim, ... }@inputs:
-    let
-      inherit (self) outputs;
-      systems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
-      packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      overlays = import ./overlays { inherit inputs; };
-      nixosConfigurations = {
-        nixos-vm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/nixos-vm ];
-        };
-        serenity = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/serenity ];
-        };
-        coruscant = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/coruscant];
-        };
-        razorcrest = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/razorcrest];
-        };
+  outputs = {
+    self,
+    home-manager,
+    nixpkgs,
+    hyprland,
+    nixvim,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+  in {
+    packages =
+      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    overlays = import ./overlays {inherit inputs;};
+    nixosConfigurations = {
+      nixos-vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/nixos-vm];
       };
-      homeConfigurations = {
-        "fredrik@nixos-vm" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/fredrik/nixos-vm.nix ];
-        };
-        "fredrik@serenity" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/fredrik/serenity.nix ];
-        };
-        "fredrik@coruscant" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/fredrik/coruscant.nix ];
-        };
-        "fredrik@razorcrest" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/fredrik/razorcrest.nix ];
-        };
+      serenity = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/serenity];
       };
-        devShells = forAllSystems (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in {
-          kube = pkgs.mkShell {
-            name = "kube-dev-shell";
-
-            packages = [
-              (pkgs.python3.withPackages (python-pkgs: [
-                python-pkgs.openshift
-                python-pkgs.kubernetes
-                python-pkgs.pyyaml
-              ]))
-              pkgs.kubectl
-              pkgs.k9s
-              pkgs.ansible
-              pkgs.kubernetes-helm
-            ];
-
-            shellHook = ''
-              echo "🔧 Kubernetes dev shell ready for ${system}"
-            '';
-          };
-        });
+      coruscant = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/coruscant];
+      };
+      razorcrest = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/razorcrest];
+      };
     };
+    homeConfigurations = {
+      "fredrik@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/fredrik/nixos-vm.nix];
+      };
+      "fredrik@serenity" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/fredrik/serenity.nix];
+      };
+      "fredrik@coruscant" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/fredrik/coruscant.nix];
+      };
+      "fredrik@razorcrest" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/fredrik/razorcrest.nix];
+      };
+    };
+    devShells = forAllSystems (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      kube = pkgs.mkShell {
+        name = "kube-dev-shell";
+
+        packages = [
+          (pkgs.python3.withPackages (python-pkgs: [
+            python-pkgs.openshift
+            python-pkgs.kubernetes
+            python-pkgs.pyyaml
+          ]))
+          pkgs.kubectl
+          pkgs.k9s
+          pkgs.ansible
+          pkgs.kubernetes-helm
+        ];
+
+        shellHook = ''
+          echo "🔧 Kubernetes dev shell ready for ${system}"
+        '';
+      };
+    });
+  };
 }
