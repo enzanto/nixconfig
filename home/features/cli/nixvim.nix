@@ -59,6 +59,10 @@ in {
           action = "<cmd>:Gitsigns stage_hunk<cr>";
           key = "<leader>hs";
         }
+        {
+          action = "<cmd>Telescope find_files<cr>";
+          key = "<leader>ff";
+        }
       ];
       plugins = {
         cmp = {
