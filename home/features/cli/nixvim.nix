@@ -30,13 +30,14 @@ in {
       globals.mapleader = " ";
       globals.maplocalleader = " ";
       opts = {
+        autoindent = true;
+        conceallevel = 2;
+        mouse = "a";
         number = true;
         relativenumber = true;
-        autoindent = true;
-        tabstop = 4;
         shiftwidth = 4;
-        mouse = "a";
         spell = true;
+        tabstop = 4;
       };
       keymaps = [
         {
@@ -74,6 +75,8 @@ in {
             {name = "buffer";}
           ];
         };
+        cmp_luasnip.enable = true;
+        cmp-nvim-lsp.enable = true;
         conform-nvim = {
           enable = true;
           settings = {
@@ -87,6 +90,7 @@ in {
             };
           };
         };
+        friendly-snippets.enable = true;
         fugitive.enable = true;
         gitsigns.enable = true;
         lsp = {
@@ -99,10 +103,15 @@ in {
           };
         };
         lualine.enable = true;
+        luasnip.enable = true;
         nvim-autopairs.enable = true;
         nvim-tree = {
           enable = true;
           actions.openFile.quitOnOpen = true;
+        };
+        obsidian = {
+          enable = true;
+          settings.dir = "~/jottacloud/Obsidian/Noroff";
         };
         rainbow-delimiters.enable = true;
         treesitter = {
