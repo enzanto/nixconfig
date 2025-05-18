@@ -15,6 +15,7 @@ in {
     ];
     programs.nixvim = {
       enable = true;
+      clipboard.register = "unnamedplus";
       colorschemes.gruvbox.enable = true;
       # colorschemes.catppuccin.enable = true;
       defaultEditor = true;
