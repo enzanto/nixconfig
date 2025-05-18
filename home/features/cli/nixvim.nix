@@ -94,6 +94,7 @@ in {
         friendly-snippets.enable = true;
         fugitive.enable = true;
         gitsigns.enable = true;
+        hardtime.enable = true;
         lsp = {
           enable = true;
           servers = {
