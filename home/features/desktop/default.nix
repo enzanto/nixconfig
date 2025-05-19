@@ -1,17 +1,18 @@
-{ pkgs, ...}: {
-      imports = [
-        ./vscode.nix
-        ./plex.nix
-		./hyprland.nix
+{pkgs, ...}: {
+  imports = [
+    ./hyprland.nix
     ./latex.nix
+    ./plex.nix
+    ./vscode.nix
     ./wireshark.nix
-      ];
-      home.packages = with pkgs; [
-        libreoffice
-        thunderbird
-        firefox
-        vesktop
-        yubioath-flutter
-        qalculate-qt
-      ];
+  ];
+  home.packages = with pkgs; [
+    firefox
+    libreoffice
+    obsidian
+    qalculate-qt
+    thunderbird
+    vesktop
+    yubioath-flutter
+  ];
 }
