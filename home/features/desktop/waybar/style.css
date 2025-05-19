@@ -41,11 +41,15 @@
     border-bottom: 5px solid #98971a
   }
   
+  #pulseaudio label {
+	  padding-left: 5px;
+  }
   #pulseaudio {
     margin: 0;
     color: #689d6a;
     border-bottom: 5px solid #689d6a;
   }
+
   
   #pulseaudio.muted {
     padding: 0 20px;

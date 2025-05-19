@@ -9,7 +9,7 @@
         height = 30;
         modules-left = ["hyprland/workspaces"];
         modules-center = ["hyprland/window"];
-        modules-right = [ "custom/weather" "pulseaudio" "battery" "clock" "network" "bluetooth" "tray"];
+        modules-right = ["custom/weather" "pulseaudio" "battery" "clock" "network" "bluetooth" "tray"];
         "hyprland/workspaces" = {
           disable-scroll = true;
           show-special = true;
@@ -34,8 +34,6 @@
           };
         };
 
-
-
         "custom/weather" = {
           format = " {} ";
           exec = "curl -s 'wttr.in/?format=3'";
@@ -44,7 +42,7 @@
         };
 
         "pulseaudio" = {
-          format = "{icon} {volume}%";
+          format = "{icon}   {volume}%";
           format-bluetooth = "{icon} {volume}% ";
           format-muted = "";
           format-icons = {
@@ -81,12 +79,12 @@
         };
 
         "network" = {
-        format-wifi = "wifi {bandwidthDownBits}";
-        format-ethernet= "enth {bandwidthDownBits}";
-        format-disconnected = "no network";
-        interval= 5;
-        tooltip= false;
-        on-click = "nm-applet";
+          format-wifi = "wifi {bandwidthDownBits}";
+          format-ethernet = "enth {bandwidthDownBits}";
+          format-disconnected = "no network";
+          interval = 5;
+          tooltip = false;
+          on-click = "nm-applet";
         };
 
         "tray" = {
@@ -97,3 +95,4 @@
     };
   };
 }
+

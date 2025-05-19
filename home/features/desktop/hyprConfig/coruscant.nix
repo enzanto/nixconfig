@@ -25,13 +25,13 @@
       splash = false;
       splash_offset = 2.0;
 
-      preload =
-          [ "/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg" ];
+      preload = ["/home/fredrik/Pictures/wallpapers/1.jpg"];
 
       wallpaper = [
-          "DP-2,/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg"
-          "HDMI-A-2,/home/fredrik/Pictures/wallpapers/anime_girl_alone_5k-1366x768.jpg"
-          ];
+        "DP-2,/home/fredrik/Pictures/wallpapers/1.jpg"
+        "HDMI-A-2,/home/fredrik/Pictures/wallpapers/1.jpg"
+        "HDMI-A-1,/home/fredrik/Pictures/wallpapers/1.jpg"
+      ];
     };
   };
 }
