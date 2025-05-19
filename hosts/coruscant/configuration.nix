@@ -1,14 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
   # boot.kernelModules = [ "vmw_pvscsi" "vmw_vmci" "vmmon" "vmnet" "fuse" ];
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -27,7 +28,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 11434 80 443];
+  networking.firewall.allowedTCPPorts = [11434 80 443];
 
   # Enable OpenGL
   hardware.graphics = {
@@ -43,7 +44,7 @@
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
     # of just the bare essentials.
     powerManagement.enable = true;
 
@@ -53,15 +54,15 @@
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -72,8 +73,8 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   environment.sessionVariables = {
-      WLR_NOHARDWARE_CURSORS = "1";
-      NIXOS_OZONE_WL = "1";
+    WLR_NOHARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
   };
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -122,17 +123,17 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-#  users.users.fredrik = {
-#    isNormalUser = true;
-#    description = "Fredrik Gjellestad";
-#    extraGroups = [ "networkmanager" "wheel" ];
-#    packages = with pkgs; [
-#      kate
-#      vim
-#      git
-    #  thunderbird
-#    ];
-#  };
+  #  users.users.fredrik = {
+  #    isNormalUser = true;
+  #    description = "Fredrik Gjellestad";
+  #    extraGroups = [ "networkmanager" "wheel" ];
+  #    packages = with pkgs; [
+  #      kate
+  #      vim
+  #      git
+  #  thunderbird
+  #    ];
+  #  };
 
   # Install firefox.
 
@@ -155,14 +156,14 @@
     package = pkgs.docker.override {buildxSupport = true;};
     daemon.settings.features.cdi = true;
   };
-    boot.binfmt.emulatedSystems = [
-    "aarch64-linux"  # ARM 64-bit
-    "armv7l-linux"   # ARM 32-bit
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux" # ARM 64-bit
+    "armv7l-linux" # ARM 32-bit
   ];
   # virtualisation.vmware.host = {
   #   enable = true;
   #   package = pkgs.vmware-workstation;
-  #   extraPackages = with pkgs; [ 
+  #   extraPackages = with pkgs; [
   #     open-vm-tools
   #     ];
   # };
@@ -170,31 +171,31 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  #vmware-workstation
-  lutris
-  wowup-cf
-  nixd
-  vesktop
-  libxfs
-  ciscoPacketTracer8
-  qt6.qtwayland 
-  zmusic
-  qt5.qtbase
-  qt5.qtwayland
-  gcc
-  docker-buildx
-  qemu
-  qemu-user
-  qemu_full
-  gnupg
-  pinentry-qt
-  paperkey
-  yubikey-personalization
-  yubikey-manager
-
-
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    #vmware-workstation
+    ciscoPacketTracer8
+    docker-buildx
+    freerdp3
+    gcc
+    gnupg
+    libxfs
+    lutris
+    nixd
+    paperkey
+    pavucontrol
+    pinentry-qt
+    qemu
+    qemu-user
+    qemu_full
+    qt5.qtbase
+    qt5.qtwayland
+    qt6.qtwayland
+    vesktop
+    wowup-cf
+    yubikey-manager
+    yubikey-personalization
+    zmusic
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -209,35 +210,37 @@
     enable = true;
     binfmt = true;
   };
+  programs.gamemode.enable = true;
   programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      };
+    enable = true;
+    gamescopeSession.enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry.qt;
   };
-xdg ={
-  portal = {
-  enable = true;
-  xdgOpenUsePortal = true;
-  config = {
-    common.default = ["gtk"];
-    hyprland.default = ["gtk" "hyprland"];
+  xdg = {
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      config = {
+        common.default = ["gtk"];
+        hyprland.default = ["gtk" "hyprland"];
+      };
+      configPackages = [
+        pkgs.gnome-session
+      ];
+      extraPortals = [
+        pkgs.kdePackages.xdg-desktop-portal-kde
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
+      ];
+    };
   };
-  configPackages = [
-            pkgs.gnome-session
-        ];
-  extraPortals = [
-            pkgs.kdePackages.xdg-desktop-portal-kde
-            pkgs.xdg-desktop-portal-gtk
-            pkgs.xdg-desktop-portal-hyprland
-        ];
-  };
-};
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -266,5 +269,4 @@ xdg ={
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
