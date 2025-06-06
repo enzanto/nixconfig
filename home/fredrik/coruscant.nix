@@ -28,5 +28,7 @@
   };
   home.packages = with pkgs; [
     tradingview
+    azure-cli
+    bicep
   ];
 }
