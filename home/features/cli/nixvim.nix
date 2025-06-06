@@ -74,14 +74,22 @@ in {
         cmp = {
           enable = true;
           autoEnableSources = true;
+          settings.mapping = {
+            "<C-n>" = "cmp.mapping.select_next_item()";
+            "<C-space>" = "cmp.mapping.complete()";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+          };
           settings.sources = [
             {name = "nvim_lsp";}
             {name = "path";}
             {name = "buffer";}
+            {name = "luasnip";}
           ];
         };
+        cmp-buffer.enable = true;
         cmp_luasnip.enable = true;
         cmp-nvim-lsp.enable = true;
+        cmp-nvim-lua.enable = true;
         conform-nvim = {
           enable = true;
           settings = {
