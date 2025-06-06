@@ -51,11 +51,13 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
+          focus_on_activate = true;
         };
         monitor = hostConfig.monitor; # or "";
         # monitor = [
         #     "eDP-1, 1920x1080,0x0,1"
         # ];
+        workspace = hostConfig.workspace; # or "";
 
         bind = [
           "$mod, F, exec, firefox"
