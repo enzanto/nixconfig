@@ -198,6 +198,14 @@ in {
             sha256 = "sha256-gQy8rQBTzODp8OfnHdggxSq275/9T8feJAkWzH+CdvU=";
           };
         }
+        {
+          plugin = pkgs.fetchFromGitHub {
+            owner = "carlsmedstad";
+            repo = "vim-bicep";
+            rev = "8172cf773d52302d6c9d663487f56630302b2fda";
+            sha256 = "ls3+V51l6xq16ZIf5N9THsQ/rIgK+OXovND8//avs/0=";
+          };
+        }
         UltiSnips
       ];
     };
