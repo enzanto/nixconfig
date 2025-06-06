@@ -65,6 +65,10 @@ in {
           action = "<cmd>Telescope find_files<cr>";
           key = "<leader>ff";
         }
+        {
+          action = "<cmd>ObsidianSearch<cr>";
+          key = "<leader>fo";
+        }
       ];
       plugins = {
         cmp = {
@@ -113,9 +117,59 @@ in {
         };
         obsidian = {
           enable = true;
-          settings.dir = "~/jottacloud/Obsidian/Noroff";
+          settings = {
+            completion = {
+              nvimCmp = true;
+            };
+            note_frontmatter_func = {
+              __raw = ''
+                           function(note)
+                             if note.title then
+                           	note:add_alias(note.title)
+                             end
+
+                             local git_author = vim.fn.system("git config user.name"):gsub("%s+$", "")
+
+                             local out = {
+                           	id = note.id,
+                           	aliases = note.aliases,
+                           	tags = note.tags,
+                           	author = git_author,
+                title = note.title,
+                             }
+
+                             if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+                           	for k, v in pairs(note.metadata) do
+                           	  out[k] = v
+                           	end
+                             end
+
+                             return out
+                           end
+              '';
+            };
+            note_id_func = {
+              __raw = ''
+                function(title)
+
+                  local suffix = ""
+                  if title ~= nil then
+                	suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+                  else
+                	for _ = 1, 4 do
+                	  suffix = suffix .. string.char(math.random(65, 90))
+                	end
+                  end
+                  return tostring(os.time()) .. "-" .. suffix
+                end
+
+              '';
+            };
+          };
+          settings.dir = "~/jottacloud/Obsidian/Main";
         };
         rainbow-delimiters.enable = true;
+        render-markdown.enable = true;
         treesitter = {
           enable = true;
           folding = true;
