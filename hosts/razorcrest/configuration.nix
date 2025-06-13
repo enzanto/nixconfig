@@ -1,14 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -64,14 +65,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  nixd
-  pavucontrol
-  kdePackages.konsole
-  gnupg
-  pinentry-qt
-  yubikey-personalization
-  yubikey-manager
-  #  wget
+    nixd
+    bicep
+    pavucontrol
+    kdePackages.konsole
+    gnupg
+    pinentry-qt
+    yubikey-personalization
+    yubikey-manager
+    #  wget
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -100,16 +102,15 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-
   xdg.portal.enable = true;
-        xdg.portal.xdgOpenUsePortal = true;
-        xdg.portal.configPackages = [
-            pkgs.gnome-session
-        ];
-        xdg.portal.extraPortals = [
-            pkgs.kdePackages.xdg-desktop-portal-kde
-            pkgs.xdg-desktop-portal-gtk
-        ];
+  xdg.portal.xdgOpenUsePortal = true;
+  xdg.portal.configPackages = [
+    pkgs.gnome-session
+  ];
+  xdg.portal.extraPortals = [
+    pkgs.kdePackages.xdg-desktop-portal-kde
+    pkgs.xdg-desktop-portal-gtk
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -124,5 +125,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
