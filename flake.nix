@@ -43,20 +43,8 @@
     ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # packages =
-    #   forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-
-    packages = forAllSystems (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      inherit (import ./pkgs pkgs);
-
-      # New: nixvim with your config
-      nixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
-        inherit pkgs;
-        module = import ./nixvim-standalone.nix;
-      };
-    });
+    packages =
+      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     overlays = import ./overlays {inherit inputs;};
     nixosConfigurations = {
       nixos-vm = nixpkgs.lib.nixosSystem {
