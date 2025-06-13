@@ -70,10 +70,10 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/fredrik/nixos-vm.nix];
       };
-      "fredrik@serenity" = home-manager.lib.homeManagerConfiguration {
+      "fredrik@kali" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/fredrik/serenity.nix];
+        modules = [./home/fredrik/kali.nix];
       };
       "fredrik@coruscant" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
