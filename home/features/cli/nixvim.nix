@@ -121,7 +121,10 @@ in {
           };
         };
         lualine.enable = true;
-        luasnip.enable = true;
+        luasnip = {
+          enable = true;
+          fromLua = [{paths = ./snippets;}];
+        };
         nvim-autopairs.enable = true;
         nvim-tree = {
           enable = true;
@@ -146,7 +149,7 @@ in {
                            	id = note.id,
                            	aliases = note.aliases,
                            	tags = note.tags,
-                           	author = git_author,
+                           	note_author = git_author,
                 title = note.title,
                              }
 
