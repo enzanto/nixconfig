@@ -66,6 +66,10 @@ in {
           key = "<leader>ff";
         }
         {
+          action = "<cmd>Telescope live_grep<cr>";
+          key = "<leader>lg";
+        }
+        {
           action = "<cmd>ObsidianSearch<cr>";
           key = "<leader>fo";
         }
@@ -77,7 +81,7 @@ in {
           settings.mapping = {
             "<C-n>" = "cmp.mapping.select_next_item()";
             "<C-space>" = "cmp.mapping.complete()";
-            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<tab>" = "cmp.mapping.confirm({ select = true })";
           };
           settings.sources = [
             {name = "nvim_lsp";}
