@@ -10,6 +10,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+  boot.extraModulePackages = [pkgs.linuxPackages.v4l2loopback];
+  boot.kernelModules = ["v4l2loopback"];
   # boot.kernelModules = [ "vmw_pvscsi" "vmw_vmci" "vmmon" "vmnet" "fuse" ];
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
