@@ -61,12 +61,14 @@ in {
 
         bind = [
           "$mod, F, exec, firefox"
+          "$mod SHIFT, F, exec, [workspace 6] firefox -P Noroff"
           "$mod, t, exec, konsole"
+          "$mod, m, exec, [workspace 5 silent] thunderbird"
           "$mod, RETURN, exec, $menu"
           "$mod, L, exec, hyprlock"
           "$mod, Q, killactive"
           "$mod, c, exec, code"
-          "$mod, e, exec, dolphin"
+          "$mod, e, exec, thunar"
           "$mod, p, exec, waypaper --folder /home/fredrik/Pictures/wallpapers" #needs more setup!
           "$mod, left, movefocus, l " # Focus left window
           "$mod, right, movefocus, r" # Focus right window
@@ -107,9 +109,10 @@ in {
 
           # Screenshots
           ", Print, exec, ${lib.getExe pkgs.hyprshot} full --mode output -o $XDG_PICTURES_DIR/screenshots" # --raw | ${lib.getExe pkgs.satty} --filename -"
-          "SHIFT, Print, exec, ${lib.getExe pkgs.hyprshot} --mode window --raw | ${lib.getExe pkgs.satty} --filename -"
+          # "SHIFT, Print, exec, ${lib.getExe pkgs.hyprshot} --mode window --raw | ${lib.getExe pkgs.satty} --filename -"
+          "SHIFT, Print, exec, active_win_id=$(hyprctl activewindow -j | jq '.id'); ${lib.getExe pkgs.hyprshot} --window $active_win_id --raw | ${lib.getExe pkgs.satty} --filename -"
           "$mod SHIFT, Print, exec, ${lib.getExe pkgs.hyprshot} -m region --clipboard-only"
-          "ALT, Print, exec, ${lib.getExe pkgs.hyprshot} --mode region --raw | ${lib.getExe pkgs.satty} --filename -"
+          "ALT, Print, exec, ${lib.getExe pkgs.hyprshot} --mode region --raw | ${lib.getExe pkgs.swappy} -f -"
         ];
         bindel = [
           ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -200,6 +203,7 @@ in {
       hyprpaper
       hyprshot
       satty
+      swappy
       xfce.thunar
       waypaper
       #waybar
