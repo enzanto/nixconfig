@@ -1,5 +1,9 @@
 -- ~/.config/nixvim/lua/snippets/markdown.lua
 return {
+	-- bold
+	s("bb", {
+		t("**"), i(1), t("** "),
+	}),
   -- Regular snippet
   s("manp", {
     t("> [!info]- Man Pages"),
