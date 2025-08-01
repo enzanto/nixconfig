@@ -1,5 +1,4 @@
 {
-
   config,
   pkgs,
   inputs,
@@ -14,8 +13,8 @@
       "networkmanager"
       "wireshark"
       "docker" # to use docker without sudo
+      "render"
       #"libvirtd" #virtualization
-
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINk7Lqwa1g2P4hZb7pHVX2nVe2MVRwqK7e3QmMqv8qbp"
@@ -24,9 +23,9 @@
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
   };
   systemd.tmpfiles.rules = [
-  "d /home/fredrik/Downloads 1755 fredrik users 14d" #man pages to fine tune this to avoid accesses time to be considered
-];
+    "d /home/fredrik/Downloads 1755 fredrik users 14d" #man pages to fine tune this to avoid accesses time to be considered
+  ];
 
-  home-manager.users.fredrik = 
+  home-manager.users.fredrik =
     import ../../../home/fredrik/${config.networking.hostName}.nix;
 }
