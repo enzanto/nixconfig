@@ -9,6 +9,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../common/virtualisation.nix
+    ../common/vlans.nix
   ];
   boot.extraModulePackages = [pkgs.linuxPackages.v4l2loopback];
   boot.kernelModules = ["v4l2loopback"];
@@ -29,7 +31,8 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = true;
+  # networking.useNetworkd = true;
   networking.firewall.allowedTCPPorts = [11434 80 443];
 
   # Enable OpenGL
@@ -176,7 +179,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     #vmware-workstation
-    ciscoPacketTracer8
+    # ciscoPacketTracer8
     docker-buildx
     freerdp3
     gcc
@@ -187,9 +190,10 @@
     paperkey
     pavucontrol
     pinentry-qt
-    qemu
-    qemu-user
-    qemu_full
+    prusa-slicer
+    # qemu
+    # qemu-user
+    # qemu_full
     qt5.qtbase
     qt5.qtwayland
     qt6.qtwayland
@@ -198,6 +202,9 @@
     yubikey-manager
     yubikey-personalization
     zmusic
+    # test to make kvm use 3d accelerations
+    mesa
+    libglvnd
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
