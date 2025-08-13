@@ -17,8 +17,9 @@ in {
       programs.nixvim = {
         enable = true;
         clipboard.register = "unnamedplus";
-        colorschemes.gruvbox.enable = true;
+        # colorschemes.gruvbox.enable = true;
         # colorschemes.catppuccin.enable = true;
+        colorschemes.nord.enable = true;
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
@@ -100,6 +101,7 @@ in {
               {name = "path";}
               {name = "buffer";}
               {name = "luasnip";}
+              {name = "spell";}
             ];
           };
           cmp-buffer.enable = true;

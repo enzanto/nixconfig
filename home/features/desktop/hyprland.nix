@@ -26,7 +26,7 @@ in {
       extraConfig = hostConfig.extraConfig or "";
       settings = {
         "$mod" = "SUPER";
-        "$menu" = "wofi --show drun";
+        "$menu" = "rofi -show drun";
         decoration = {
           active_opacity = 0.85;
           inactive_opacity = 0.85;
@@ -64,7 +64,13 @@ in {
           "$mod SHIFT, F, exec, [workspace 6] firefox -P Noroff"
           "$mod, t, exec, konsole"
           "$mod, m, exec, [workspace 5 silent] thunderbird"
+          # Rofi shortcuts
           "$mod, RETURN, exec, $menu"
+          "$mod shift, E, exec, rofi -show emoji"
+          "$mod shift, T, exec, rofi -show top"
+          "$mod shift, C, exec, rofi -show calc"
+          # "ALT TAB, exec, rofi -show window"
+
           "$mod, L, exec, hyprlock"
           "$mod, Q, killactive"
           "$mod, c, exec, code"
@@ -207,9 +213,29 @@ in {
       xfce.thunar
       waypaper
       #waybar
-      wofi
+      rofi-bluetooth
+      rofi-systemd
+      # rofi-wayland
     ];
     programs.waybar = waybarConf.programs.waybar; # {
+    programs.rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+      extraConfig = {
+        modi = "drun,run,window,calc";
+        drun-display-format = "{icon} {name}";
+        display-drun = "🕵 Application";
+        show-icons = true;
+      };
+      plugins = with pkgs; [
+        rofi-calc
+        rofi-emoji-wayland
+        rofi-power-menu
+        rofi-top
+        # rofi-bluetooth
+      ];
+      theme = "rounded-nord-dark";
+    };
     #   enable = true;
     #   systemd.enable = true;
 

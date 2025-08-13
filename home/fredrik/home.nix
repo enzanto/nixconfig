@@ -41,7 +41,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     git
-    wofi
+    # rofi-wayland
     vlc
     insomnia
   ];
@@ -83,10 +83,11 @@
   programs.bash = {
     enable = true;
     bashrcExtra = ''
-         export EDITOR=nvim
-         alias kube="nix develop self#kube"
-         alias clip="wl-copy"
-      alias notes="cd ~/jottacloud/Obsidian/Main && vim"
+            export EDITOR=nvim
+            alias kube="nix develop self#kube"
+            alias clip="wl-copy"
+      alias cdtmp="cd $(mktemp -d)"
+         alias notes="cd ~/jottacloud/Obsidian/Main && vim"
     '';
   };
 
