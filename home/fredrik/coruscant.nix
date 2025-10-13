@@ -1,6 +1,7 @@
 {
   #config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -19,7 +20,7 @@
       nixvim.enable = true;
     };
     desktop = {
-      vscode.enable = true;
+      vscode.enable = false;
       plex.enable = true;
       hyprland.enable = true;
       latex.enable = true;
@@ -28,7 +29,6 @@
   };
   home.packages = with pkgs; [
     tradingview
-    azure-cli
     jabref
   ];
 }
