@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   programs.dconf.enable = true;
@@ -45,40 +46,4 @@
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
-
-  # # Network Configuration
-  # systemd.network.enable = true;
-  # # networking.useNetworkd = true;
-  #
-  # systemd.network = {
-  #   netdevs = {
-  #     "20-enp5s0.2" = {
-  #       netdevConfig = {
-  #         Kind = "vlan";
-  #         Name = "enp5s0.2";
-  #       };
-  #       vlanConfig.Id = 2;
-  #     };
-  #     "20-tatooine" = {
-  #       netdevConfig = {
-  #         Kind = "bridge";
-  #         Name = "tatooine";
-  #       };
-  #     };
-  #   };
-  #
-  #   networks = {
-  #     "30-enp5s0.2" = {
-  #       matchConfig.Name = "enp5s0.2";
-  #       networkConfig.Bridge = "tatooine";
-  #       linkConfig.RequiredForOnline = "enslaved";
-  #     };
-  #
-  #     "40-tatooine" = {
-  #       matchConfig.Name = "tatooine";
-  #       networkConfig.Address = ["192.168.10.200/24"];
-  #       linkConfig.RequiredForOnline = "carrier";
-  #     };
-  #   };
-  # };
 }
