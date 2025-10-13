@@ -14,6 +14,7 @@
   ];
   boot.extraModulePackages = [pkgs.linuxPackages.v4l2loopback];
   boot.kernelModules = ["v4l2loopback"];
+  # boot.kernelParams = ["kvm.enable_virt_at_load=0"];
   # boot.kernelModules = [ "vmw_pvscsi" "vmw_vmci" "vmmon" "vmnet" "fuse" ];
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -24,6 +25,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "coruscant"; # Define your hostname.
+  services.resolved = {
+    enable = true;
+    domains = ["nerdiverset.no"];
+    extraConfig = ''
+      DNS=192.168.10.100
+    '';
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -179,12 +187,13 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     #vmware-workstation
-    # ciscoPacketTracer8
+    ciscoPacketTracer8
     docker-buildx
     freerdp3
     gcc
     gnupg
     libxfs
+    libxml2
     lutris
     nixd
     paperkey
@@ -195,8 +204,10 @@
     # qemu-user
     # qemu_full
     qt5.qtbase
+    # qt5.qtwebengine
     qt5.qtwayland
     qt6.qtwayland
+    sl1-to-photon
     vesktop
     wowup-cf
     yubikey-manager
@@ -205,6 +216,8 @@
     # test to make kvm use 3d accelerations
     mesa
     libglvnd
+    #test
+    libtommath
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
