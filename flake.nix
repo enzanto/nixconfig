@@ -29,6 +29,7 @@
     self,
     home-manager,
     nixpkgs,
+    nixpkgs-stable,
     hyprland,
     nixvim,
     ...
@@ -97,6 +98,7 @@
             python-pkgs.openshift
             python-pkgs.kubernetes
             python-pkgs.pyyaml
+            python-pkgs.jmespath
           ]))
           pkgs.kubectl
           pkgs.k9s

@@ -2,10 +2,12 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
   cfg = config.features.cli.nixvim;
+  stablePkgs = inputs.nixpkgs-stable.legacyPackages.${pkgs.system};
 in {
   options.features.cli.nixvim.enable = mkEnableOption "Enables nixvim";
 
@@ -194,8 +196,15 @@ in {
 
                 '';
               };
+
+              workspaces = [
+                {
+                  name = "Main";
+                  path = "~/jottacloud/Obsidian/Main";
+                }
+              ];
             };
-            settings.dir = "~/jottacloud/Obsidian/Main";
+            #settings.dir = "~/jottacloud/Obsidian/Main";
           };
           rainbow-delimiters.enable = true;
           render-markdown.enable = true;
@@ -209,7 +218,7 @@ in {
           treesitter-textobjects.enable = true;
           vimtex = {
             enable = true;
-            texlivePackage = pkgs.texlive.combined.scheme-full;
+            texlivePackage = stablePkgs.texlive.combined.scheme-full;
           };
         };
         extraPlugins = with pkgs.vimPlugins; [

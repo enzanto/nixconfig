@@ -39,7 +39,22 @@ return{
     end, {1}), t({"}", "",
       "    \\end{figure}", 
       "  \\end{minipage} \\\\ \\hline"})
-  })
+  }),
+s("em", {
+  t("\\emph{"),
+  i(1, "text"),
+  t("}"),
+}),
+s("pcite", {
+  t("\\parencite{"),
+  i(1, "text"),
+  t("}"),
+}),
+s("bb", {
+  t("\\textbf{"),
+  i(1, "text"),
+  t("}"),
+})
 }
 
 

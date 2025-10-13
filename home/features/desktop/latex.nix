@@ -1,20 +1,20 @@
 {
-    config,
-    lib,
-    pkgs,
-    ...
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
 }:
 with lib; let
-    cfg = config.features.desktop.latex;
+  cfg = config.features.desktop.latex;
+  stablePkgs = inputs.nixpkgs-stable.legacyPackages.${pkgs.system};
 in {
-    options.features.desktop.latex.enable = mkEnableOption "enable latex";
+  options.features.desktop.latex.enable = mkEnableOption "enable latex";
 
-    config = mkIf cfg.enable {
-        home.packages = with pkgs; [
-            texliveFull
-            texstudio
-        ];
-
-        };
+  config = mkIf cfg.enable {
+    home.packages = with stablePkgs; [
+      texliveFull
+      texstudio
+    ];
+  };
 }
-
