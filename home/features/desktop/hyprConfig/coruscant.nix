@@ -1,7 +1,7 @@
 {
   monitor = [
-    "HDMI-A-1,1920x1080,-1080x-138,1,transform,1"
     "DP-2,2560x1440@143.91,0x0,1"
+    "HDMI-A-1,1920x1080,-1080x-138,1,transform,1"
     "HDMI-A-2, 1920x1080,2560x250,1"
   ];
   workspace = [
@@ -39,6 +39,11 @@
     cursor {
       no_hardware_cursors = true
     }
+    windowrulev2 = opacity 1.0 override, class:^(.virt-manager-wrapped)$
+    windowrulev2 = opacity 1.0 override, class:^(swappy)$
+    windowrulev2 = opacity 1.0 override, class:^(VirtualBox Machine)$
+    windowrulev2 = opacity 1.0 override, class:^(VirtualBox Manager)$
+    windowrulev2 = opacity 1.0 override, class:^(VirtualBox)$
   '';
   hyprpaper = {
     enable = true;

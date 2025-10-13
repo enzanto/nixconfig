@@ -40,7 +40,8 @@ in {
           "waybar &"
           "hyprpaper &"
           "hyprlock -c /home/fredrik/.config/hypr/hyprlock-init.conf &"
-          "hypridle &"
+          # "hypridle &"
+          "xrandr --output DP-2 --primary"
         ];
         general = {
           layout = "master";
@@ -134,10 +135,10 @@ in {
             natural_scroll = true;
           };
         };
-        gestures = {
-          workspace_swipe = true;
-          workspace_swipe_min_fingers = true;
-        };
+        # gestures = {
+        #   workspace_swipe = true;
+        #   workspace_swipe_min_fingers = true;
+        # };
       };
     };
     services = {
