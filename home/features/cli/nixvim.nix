@@ -130,7 +130,7 @@ in {
           lsp = {
             enable = true;
             servers = {
-              lua-ls.enable = true;
+              lua_ls.enable = true;
               pylsp.enable = true;
               nixd.enable = true;
               texlab.enable = true;
@@ -144,7 +144,7 @@ in {
           nvim-autopairs.enable = true;
           nvim-tree = {
             enable = true;
-            actions.openFile.quitOnOpen = true;
+            settings.actions.open_file.quit_on_open = true;
           };
           obsidian = {
             enable = true;
@@ -220,6 +220,7 @@ in {
             enable = true;
             texlivePackage = stablePkgs.texlive.combined.scheme-full;
           };
+          web-devicons.enable = true;
         };
         extraPlugins = with pkgs.vimPlugins; [
           {

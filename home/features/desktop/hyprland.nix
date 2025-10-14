@@ -221,7 +221,7 @@ in {
     programs.waybar = waybarConf.programs.waybar; # {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
+      package = pkgs.rofi;
       extraConfig = {
         modi = "drun,run,window,calc";
         drun-display-format = "{icon} {name}";
@@ -230,7 +230,7 @@ in {
       };
       plugins = with pkgs; [
         rofi-calc
-        rofi-emoji-wayland
+        rofi-emoji
         rofi-power-menu
         rofi-top
         # rofi-bluetooth
