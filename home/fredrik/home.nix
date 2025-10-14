@@ -83,11 +83,13 @@
   programs.bash = {
     enable = true;
     bashrcExtra = ''
-            export EDITOR=nvim
-            alias kube="nix develop self#kube"
-            alias clip="wl-copy"
-      alias cdtmp="cd $(mktemp -d)"
-         alias notes="cd ~/jottacloud/Obsidian/Main && vim"
+             export EDITOR=nvim
+      export LIBVIRT_DEFAULT_URI=qemu:///system
+             alias kube="nix develop self#kube"
+             alias clip="wl-copy"
+       		alias cdtmp="cd $(mktemp -d)"
+          	alias notes="cd ~/jottacloud/Obsidian/Main && vim"
+          	alias nixconf="cd ~/.nixconfig && vim"
     '';
   };
 
