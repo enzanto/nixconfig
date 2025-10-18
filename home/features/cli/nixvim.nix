@@ -74,8 +74,12 @@ in {
             key = "<leader>lg";
           }
           {
-            action = "<cmd>ObsidianSearch<cr>";
+            action = "<cmd>Obsidian search<cr>";
             key = "<leader>fo";
+          }
+          {
+            action = "<cmd>:VimuxRunCommand('python3 ' . expand('%:p'))<cr>";
+            key = "<leader>rp";
           }
         ];
         plugins = {
@@ -145,6 +149,7 @@ in {
           nvim-tree = {
             enable = true;
             settings.actions.open_file.quit_on_open = true;
+              legacy_commands = false;
           };
           obsidian = {
             enable = true;
@@ -152,7 +157,7 @@ in {
               completion = {
                 nvimCmp = true;
               };
-              note_frontmatter_func = {
+              frontmatter.func = {
                 __raw = ''
                              function(note)
                                if note.title then
