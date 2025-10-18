@@ -41,7 +41,7 @@ in {
           number = true;
           relativenumber = true;
           shiftwidth = 4;
-          spell = true;
+          spell = false;
           tabstop = 4;
         };
         keymaps = [
@@ -83,6 +83,42 @@ in {
           }
         ];
         plugins = {
+          avante = {
+            enable = true;
+            settings = {
+              provider = "ollama";
+              providers = {
+                ollama = {
+                  # __inherited_from = "ollama";
+                  endpoint = "http://localhost:11434";
+                  model = "deepseek-r1";
+                  disable_tools = true;
+                  temperature = 0.5;
+                  hide_in_model_selector = false;
+                  timeout = 10000;
+                  extraOptions = {
+                    is_env_set = ''
+                      function()
+                        return true
+                      end
+                    '';
+                  };
+                };
+              };
+              # provider = "ollamalocal";
+              # providers = {
+              #   ollamalocal = {
+              #     __inherited_from = "openai";
+              #     api_key_name = "";
+              #     endpoint = "http://localhost:11434/v1";
+              #     model = "codellama";
+              #     mode = "legacy";
+              #     disable_tools = true;
+              # --disable_tools = true, -- Open-source models often do not support tools;
+              # };
+              # };
+            };
+          };
           cmp = {
             enable = true;
             autoEnableSources = true;
@@ -149,11 +185,11 @@ in {
           nvim-tree = {
             enable = true;
             settings.actions.open_file.quit_on_open = true;
-              legacy_commands = false;
           };
           obsidian = {
             enable = true;
             settings = {
+              legacy_commands = false;
               completion = {
                 nvimCmp = true;
               };
@@ -207,12 +243,17 @@ in {
                   name = "Main";
                   path = "~/jottacloud/Obsidian/Main";
                 }
+                {
+                  name = "test";
+                  path = "~/jottacloud/Obsidian/test";
+                }
               ];
             };
             #settings.dir = "~/jottacloud/Obsidian/Main";
           };
           rainbow-delimiters.enable = true;
           render-markdown.enable = true;
+          tmux-navigator.enable = true;
           treesitter = {
             enable = true;
             folding = true;
@@ -225,6 +266,7 @@ in {
             enable = true;
             texlivePackage = stablePkgs.texlive.combined.scheme-full;
           };
+          vimux.enable = true;
           web-devicons.enable = true;
         };
         extraPlugins = with pkgs.vimPlugins; [
