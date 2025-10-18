@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ../common/virtualisation.nix
     ../common/vlans.nix
+    ../common/backup.nix
   ];
   boot.extraModulePackages = [pkgs.linuxPackages.v4l2loopback];
   boot.kernelModules = ["v4l2loopback"];
@@ -277,6 +278,12 @@
   services.openssh.enable = true;
   services.pcscd.enable = true;
   services.blueman.enable = true;
+  # Local LLM
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+  services.open-webui.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

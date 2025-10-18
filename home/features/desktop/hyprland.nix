@@ -8,7 +8,7 @@
 }:
 with lib; let
   cfg = config.features.desktop.hyprland;
-  # hostConfigPath = ./hyprConfig + "/razorcrest.nix";  # <-- Use the `hostname` argument directly
+  # hostConfigPath = ./hyprConfig/coruscant.nix; # <-- Use the `hostname` argument directly
   hostConfigPath = ./hyprConfig + "/${osConfig.networking.hostName}.nix"; # <-- Use the `hostname` argument directly
   hostConfig =
     if builtins.pathExists hostConfigPath

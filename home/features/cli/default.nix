@@ -9,7 +9,8 @@
     ./neofetch.nix
     ./neovim.nix
     ./nixvim.nix
-    inputs.nixvim.homeManagerModules.nixvim
+    ./tmux.nix
+    inputs.nixvim.homeModules.nixvim
   ];
   programs.zoxide = {
     enable = true;

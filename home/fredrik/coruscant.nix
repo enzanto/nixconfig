@@ -18,6 +18,7 @@
       neofetch.enable = true;
       neovim.enable = false;
       nixvim.enable = true;
+      tmux.enable = true;
     };
     desktop = {
       vscode.enable = false;
