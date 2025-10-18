@@ -17,9 +17,10 @@
       neofetch.enable = true;
       neovim.enable = false;
       nixvim.enable = true;
+      tmux.enable = true;
     };
     desktop = {
-      vscode.enable = true;
+      vscode.enable = false;
       plex.enable = true;
       hyprland.enable = true;
       latex.enable = true;
