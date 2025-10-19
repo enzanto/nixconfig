@@ -67,7 +67,10 @@
       };
       razorcrest = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/razorcrest];
+        modules = [
+          ./hosts/razorcrest
+          sops-nix.nixosModules.sops
+        ];
       };
     };
     homeConfigurations = {
