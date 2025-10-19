@@ -5,8 +5,12 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.sops-nix.homeManagerModules.sops
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = lib.mkDefault "fredrik";
@@ -76,6 +80,17 @@
   #
   #  /etc/profiles/per-user/m3tam3re/etc/profile.d/hm-session-vars.sh
   #
+
+  sops = {
+    age.keyFile = "/home/fredrik/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSymlinkPath = "/run/user/1000/secrets";
+    defaultSecretsMountPoint = "/run/user/1000/secrets.d";
+
+    secrets.open_ai = {
+      path = "${config.sops.defaultSymlinkPath}/open_ai";
+    };
+  };
   home.sessionVariables = {
     EDITOR = "nvim";
   };

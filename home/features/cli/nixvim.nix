@@ -25,13 +25,15 @@ in {
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
-        # extraConfig = ''
-        #     noremap <C-e> :NERDTreeToggle <CR>
-        #     let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
-        #     let g:UltiSnipsExpandTrigger       = '<Tab>'
-        #     let g:UltiSnipsJumpForwardTrigger  = '<Tab>'
-        #     let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
-        #   '';
+        extraConfigLua = ''
+          -- Load OpenAI API key only inside Neovim
+          local keyfile = "${config.sops.secrets.open_ai.path}"
+          local f = io.open(keyfile, "r")
+          if f then
+            vim.env.AVANTE_OPENAI_API_KEY = f:read("*a"):gsub("%s+$", "")
+            f:close()
+          end
+        '';
         globals.mapleader = " ";
         globals.maplocalleader = " ";
         opts = {

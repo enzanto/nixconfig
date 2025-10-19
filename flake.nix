@@ -20,6 +20,7 @@
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
     hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
@@ -29,6 +30,7 @@
     self,
     home-manager,
     nixpkgs,
+    sops-nix,
     nixpkgs-stable,
     hyprland,
     nixvim,
@@ -58,7 +60,10 @@
       };
       coruscant = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/coruscant];
+        modules = [
+          ./hosts/coruscant
+          sops-nix.nixosModules.sops
+        ];
       };
       razorcrest = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -79,12 +84,18 @@
       "fredrik@coruscant" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/fredrik/coruscant.nix];
+        modules = [
+          ./home/fredrik/coruscant.nix
+          inputs.sops-nix.homeManagerModules.sops
+        ];
       };
       "fredrik@razorcrest" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/fredrik/razorcrest.nix];
+        modules = [
+          ./home/fredrik/razorcrest.nix
+          inputs.sops-nix.homeManagerModules.sops
+        ];
       };
     };
     devShells = forAllSystems (system: let
