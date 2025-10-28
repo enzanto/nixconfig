@@ -43,7 +43,6 @@
   # networking.networkmanager.enable = true;
   # networking.useNetworkd = true;
   networking.firewall.allowedTCPPorts = [11434 80 443];
-
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
