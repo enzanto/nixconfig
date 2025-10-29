@@ -63,7 +63,7 @@ in {
         bind = [
           "$mod, F, exec, firefox"
           "$mod SHIFT, F, exec, [workspace 6] firefox -P Noroff"
-          "$mod, t, exec, konsole"
+          "$mod, t, exec, alacritty"
           "$mod, m, exec, [workspace 5 silent] thunderbird"
           # Rofi shortcuts
           "$mod, RETURN, exec, $menu"
@@ -204,7 +204,7 @@ in {
     };
     home.packages = with pkgs; [
       brightnessctl
-      kitty
+      alacritty
       hypridle
       hyprlock
       hyprpaper
