@@ -25,15 +25,15 @@ in {
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
-        extraConfigLua = ''
-          -- Load OpenAI API key only inside Neovim
-          local keyfile = "${config.sops.secrets.open_ai.path}"
-          local f = io.open(keyfile, "r")
-          if f then
-            vim.env.AVANTE_OPENAI_API_KEY = f:read("*a"):gsub("%s+$", "")
-            f:close()
-          end
-        '';
+        # extraConfigLua = ''
+        #   -- Load OpenAI API key only inside Neovim
+        #   local keyfile = "${config.sops.secrets.open_ai.path}"
+        #   local f = io.open(keyfile, "r")
+        #   if f then
+        #     vim.env.AVANTE_OPENAI_API_KEY = f:read("*a"):gsub("%s+$", "")
+        #     f:close()
+        #   end
+        # '';
         globals.mapleader = " ";
         globals.maplocalleader = " ";
         opts = {
@@ -85,42 +85,42 @@ in {
           }
         ];
         plugins = {
-          avante = {
-            enable = true;
-            settings = {
-              provider = "ollama";
-              providers = {
-                ollama = {
-                  # __inherited_from = "ollama";
-                  endpoint = "http://localhost:11434";
-                  model = "deepseek-r1";
-                  disable_tools = true;
-                  temperature = 0.5;
-                  hide_in_model_selector = false;
-                  timeout = 10000;
-                  extraOptions = {
-                    is_env_set = ''
-                      function()
-                        return true
-                      end
-                    '';
-                  };
-                };
-              };
-              # provider = "ollamalocal";
-              # providers = {
-              #   ollamalocal = {
-              #     __inherited_from = "openai";
-              #     api_key_name = "";
-              #     endpoint = "http://localhost:11434/v1";
-              #     model = "codellama";
-              #     mode = "legacy";
-              #     disable_tools = true;
-              # --disable_tools = true, -- Open-source models often do not support tools;
-              # };
-              # };
-            };
-          };
+          # avante = {
+          #   enable = true;
+          #   settings = {
+          #     provider = "ollama";
+          #     providers = {
+          #       ollama = {
+          #         # __inherited_from = "ollama";
+          #         endpoint = "http://localhost:11434";
+          #         model = "deepseek-r1";
+          #         disable_tools = true;
+          #         temperature = 0.5;
+          #         hide_in_model_selector = false;
+          #         timeout = 10000;
+          #         extraOptions = {
+          #           is_env_set = ''
+          #             function()
+          #               return true
+          #             end
+          #           '';
+          #         };
+          #       };
+          #     };
+          #     # provider = "ollamalocal";
+          #     # providers = {
+          #     #   ollamalocal = {
+          #     #     __inherited_from = "openai";
+          #     #     api_key_name = "";
+          #     #     endpoint = "http://localhost:11434/v1";
+          #     #     model = "codellama";
+          #     #     mode = "legacy";
+          #     #     disable_tools = true;
+          #     # --disable_tools = true, -- Open-source models often do not support tools;
+          #     # };
+          #     # };
+          #   };
+          # };
           cmp = {
             enable = true;
             autoEnableSources = true;
