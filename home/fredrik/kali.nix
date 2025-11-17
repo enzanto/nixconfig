@@ -16,6 +16,7 @@
   features = {
     cli = {
       nixvim.enable = true;
+      tmux.enable = true;
     };
   };
   # home.packages = with pkgs; [
