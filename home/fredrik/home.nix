@@ -108,6 +108,8 @@
     '';
   };
 
+  programs.uv.enable = true;
+
   programs.alacritty = {
     enable = true;
     settings = {

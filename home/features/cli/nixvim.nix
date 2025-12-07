@@ -243,16 +243,17 @@ in {
               workspaces = [
                 {
                   name = "Main";
-                  path = "~/jottacloud/Obsidian/Main";
+                  path = "${config.home.homeDirectory}/jottacloud/Obsidian/Main";
                 }
                 {
                   name = "test";
-                  path = "~/jottacloud/Obsidian/test";
+                  path = "${config.home.homeDirectory}/jottacloud/Obsidian/test";
                 }
               ];
             };
             #settings.dir = "~/jottacloud/Obsidian/Main";
           };
+          opencode.enable = true;
           rainbow-delimiters.enable = true;
           render-markdown.enable = true;
           tmux-navigator.enable = true;
