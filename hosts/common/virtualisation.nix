@@ -25,7 +25,7 @@
     spice
     spice-gtk
     spice-protocol
-    win-virtio
+    virtio-win
     win-spice
     gtk3
     qemu_full

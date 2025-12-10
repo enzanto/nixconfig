@@ -189,7 +189,7 @@
     #vmware-workstation
     ciscoPacketTracer8
     docker-buildx
-    freerdp3
+    freerdp
     gcc
     gnupg
     libxfs
@@ -243,7 +243,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry.qt;
+    pinentryPackage = pkgs.pinentry-qt;
   };
   xdg = {
     portal = {
