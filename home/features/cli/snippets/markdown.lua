@@ -4,6 +4,10 @@ return {
 	s("bb", {
 		t("**"), i(1), t("** "),
 	}),
+	-- italic
+	s("it", {
+		t("_"), i(1), t("_ "),
+	}),
   -- Regular snippet
   s("manp", {
     t("> [!info]- Man Pages"),
