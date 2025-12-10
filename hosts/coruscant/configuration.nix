@@ -40,8 +40,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  # networking.networkmanager.enable = true;
-  # networking.useNetworkd = true;
+  networking.useNetworkd = true; # Disable systemd-networkd to avoid conflicts with NetworkManager
   networking.firewall.allowedTCPPorts = [11434 80 443];
   # Enable OpenGL
   hardware.graphics = {
