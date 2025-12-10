@@ -155,7 +155,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #set up virtualization
-  #users.extraGroups.vmware.members = ["fredrik"];
+  users.extraGroups.vmware.members = ["fredrik"];
   users.extraGroups.vboxusers.members = ["fredrik"];
   users.extraGroups.wireshark.members = ["fredrik"];
   programs.wireshark.enable = true;
@@ -172,13 +172,13 @@
     "aarch64-linux" # ARM 64-bit
     "armv7l-linux" # ARM 32-bit
   ];
-  # virtualisation.vmware.host = {
-  #   enable = true;
-  #   package = pkgs.vmware-workstation;
-  #   extraPackages = with pkgs; [
-  #     open-vm-tools
-  #     ];
-  # };
+  virtualisation.vmware.host = {
+    enable = true;
+    package = pkgs.vmware-workstation;
+    extraPackages = with pkgs; [
+      open-vm-tools
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -194,6 +194,11 @@
     libxfs
     libxml2
     lutris
+    wineWowPackages.stable
+    winetricks
+    vulkan-tools
+    dxvk
+    nss
     nixd
     paperkey
     pavucontrol
@@ -232,6 +237,7 @@
     binfmt = true;
   };
   programs.gamemode.enable = true;
+  programs.nix-ld.enable = true;
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
