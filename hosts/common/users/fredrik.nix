@@ -14,6 +14,8 @@
       "wireshark"
       "docker" # to use docker without sudo
       "render"
+      "lp"
+      "lpadmin"
       #"libvirtd" #virtualization
     ];
     openssh.authorizedKeys.keys = [

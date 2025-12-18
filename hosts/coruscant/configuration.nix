@@ -112,8 +112,15 @@
   # Configure console keymap
   console.keyMap = "no";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Enable CUPS to print documents with Brother printer drivers
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      brlaser
+      cups-filters
+      ghostscript
+    ];
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -186,7 +193,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     #vmware-workstation
-    ciscoPacketTracer8
+    # ciscoPacketTracer8
     docker-buildx
     freerdp
     gcc
@@ -222,6 +229,8 @@
     libglvnd
     #test
     libtommath
+    system-config-printer
+    kdePackages.print-manager
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -288,6 +297,13 @@
     package = pkgs.ollama-cuda;
   };
   services.open-webui.enable = true;
+
+  # Enable avahi for printer discovery
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
