@@ -1,9 +1,4 @@
-{
-  #config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./home.nix
     ../common
@@ -28,9 +23,17 @@
       wireshark.enable = true;
     };
   };
+  programs.bash = {
+    enable = true;
+    profileExtra = ''
+      if [[ $(tty) == /dev/tty1 ]]; then
+        exec start-hyprland
+      fi
+    '';
+  };
   home.packages = with pkgs; [
     opencode
     tradingview
-    jabref
+    # jabref - Commented out due to build error.
   ];
 }

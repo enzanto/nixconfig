@@ -89,15 +89,15 @@
     NIXOS_OZONE_WL = "1";
   };
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true; - removed
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.desktopManager.plasma6.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
@@ -291,6 +291,7 @@
   services.openssh.enable = true;
   services.pcscd.enable = true;
   services.blueman.enable = true;
+  services.getty.autologinUser = "fredrik";
   # Local LLM
   services.ollama = {
     enable = true;

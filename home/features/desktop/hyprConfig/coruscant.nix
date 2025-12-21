@@ -39,11 +39,11 @@
     cursor {
       no_hardware_cursors = true
     }
-    windowrulev2 = opacity 1.0 override, class:^(.virt-manager-wrapped)$
-    windowrulev2 = opacity 1.0 override, class:^(swappy)$
-    windowrulev2 = opacity 1.0 override, class:^(VirtualBox Machine)$
-    windowrulev2 = opacity 1.0 override, class:^(VirtualBox Manager)$
-    windowrulev2 = opacity 1.0 override, class:^(VirtualBox)$
+    windowrule = opacity 1.0 override, match:class ^(.virt-manager-wrapped)$
+    windowrule = opacity 1.0 override, match:class ^(swappy)$
+    windowrule = opacity 1.0 override, match:class ^(VirtualBox Machine)$
+    windowrule = opacity 1.0 override, match:class ^(VirtualBox Manager)$
+    windowrule = opacity 1.0 override, match:class ^(VirtualBox)$
   '';
   hyprpaper = {
     enable = true;
