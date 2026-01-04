@@ -17,17 +17,19 @@
     enableFishIntegration = true;
   };
   home.packages = with pkgs; [
+    btop
     coreutils
     fd
     htop
     jq
-    ripgrep
-    zip
+    lshw
+    ncdu
+    newsboat
     python3
+    ripgrep
     sshfs
     timeshift
-    lshw
-    newsboat
     wl-clipboard
+    zip
   ];
 }
