@@ -50,15 +50,31 @@
     settings = {
       ipc = "on";
       splash = false;
-      splash_offset = 2.0;
+      splash_offset = 2;
 
-      preload = ["/home/fredrik/Pictures/wallpapers/1.jpg"];
-
+      # preload = ["/home/fredrik/Pictures/wallpapers/2.png"];
       wallpaper = [
-        "DP-2,/home/fredrik/Pictures/wallpapers/1.jpg"
-        "HDMI-A-2,/home/fredrik/Pictures/wallpapers/1.jpg"
-        "HDMI-A-1,/home/fredrik/Pictures/wallpapers/1.jpg"
+        {
+          monitor = "DP-2";
+          path = "/home/fredrik/Pictures/wallpapers/rotation";
+          timeout = 300;
+        }
+        {
+          monitor = "HDMI-A-2";
+          path = "/home/fredrik/Pictures/wallpapers/rotation";
+          timeout = 300;
+        }
+        {
+          monitor = "HDMI-A-1";
+          path = "/home/fredrik/Pictures/wallpapers/rotation";
+          timeout = 300;
+        }
       ];
+      # wallpaper = [
+      #   "DP-2,/home/fredrik/Pictures/wallpapers/2.png"
+      #   "HDMI-A-2,/home/fredrik/Pictures/wallpapers/2.png"
+      #   "HDMI-A-1,/home/fredrik/Pictures/wallpapers/2.png"
+      # ];
     };
   };
 }

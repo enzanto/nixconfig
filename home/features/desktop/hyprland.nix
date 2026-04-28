@@ -71,6 +71,8 @@ in {
           "$mod shift, T, exec, rofi -show top"
           "$mod shift, C, exec, rofi -show calc"
           # "ALT TAB, exec, rofi -show window"
+          # change opacity
+          "$mod, o, exec, hyprctl dispatch setprop active opacity 1.0 override"
 
           "$mod, L, exec, hyprlock"
           "$mod, Q, killactive"
@@ -211,7 +213,7 @@ in {
       hyprshot
       satty
       swappy
-      xfce.thunar
+      # xfce.thunar
       waypaper
       #waybar
       rofi-bluetooth
