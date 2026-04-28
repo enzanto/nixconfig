@@ -28,10 +28,12 @@
   networking.hostName = "coruscant"; # Define your hostname.
   services.resolved = {
     enable = true;
-    domains = ["nerdiverset.no"];
-    extraConfig = ''
-      DNS=192.168.10.100
-    '';
+    settings.Resolve = {
+      Domains = ["nerdiverset.no"];
+    };
+    # extraConfig = ''
+    #   DNS=192.168.10.100
+    # '';
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -179,13 +181,13 @@
     "aarch64-linux" # ARM 64-bit
     "armv7l-linux" # ARM 32-bit
   ];
-  virtualisation.vmware.host = {
-    enable = true;
-    package = pkgs.vmware-workstation;
-    extraPackages = with pkgs; [
-      open-vm-tools
-    ];
-  };
+  # virtualisation.vmware.host = {
+  #   enable = true;
+  #   package = pkgs.vmware-workstation;
+  #   extraPackages = with pkgs; [
+  #     open-vm-tools
+  #   ];
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -297,7 +299,7 @@
     enable = true;
     package = pkgs.ollama-cuda;
   };
-  services.open-webui.enable = true;
+  # services.open-webui.enable = true;
 
   # Enable avahi for printer discovery
   services.avahi = {
