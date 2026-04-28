@@ -25,7 +25,8 @@
     lshw
     ncdu
     newsboat
-    python3
+    # python3
+    (python3.withPackages (ps: [ps.debugpy]))
     ripgrep
     sshfs
     timeshift

@@ -16,6 +16,7 @@
       tmux.enable = true;
     };
     desktop = {
+      cad.enable = true;
       vscode.enable = false;
       plex.enable = true;
       hyprland.enable = true;
@@ -31,9 +32,14 @@
       fi
     '';
   };
+  programs.sqls.enable = true;
   home.packages = with pkgs; [
+    mysql80
+    dbeaver-bin
     opencode
     tradingview
+    # azure-cli
+    (azure-cli.withExtensions [azure-cli.extensions.azure-firewall])
     # jabref - Commented out due to build error.
   ];
 }

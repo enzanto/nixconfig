@@ -15,6 +15,10 @@ in {
     mkIf cfg.enable {
       home.packages = with pkgs; [
         alejandra
+        lsof
+        pyright
+        ruff
+        # python313Packages.debugpy
       ];
       programs.nixvim = {
         enable = true;
@@ -82,6 +86,48 @@ in {
           {
             action = "<cmd>:VimuxRunCommand('python3 ' . expand('%:p'))<cr>";
             key = "<leader>rp";
+          }
+          # LSP keybinds
+          {
+            action = config.lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+            key = "<leader>k";
+          }
+          {
+            action = config.lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
+            key = "<leader>j";
+          }
+          {
+            # Go to definition
+            action = "<cmd>lua vim.lsp.buf.definition()<cr>";
+            key = "gd";
+          }
+          {
+            # Go to references
+            action = "<cmd>lua vim.lsp.buf.references()<cr>";
+            key = "gr";
+          }
+          {
+            # Go to implementation
+            action = "<cmd>lua vim.lsp.buf.implementation()<cr>";
+            key = "gi";
+          }
+          {
+            # Go to type definition
+            action = "<cmd>lua vim.lsp.buf.type_definition()<cr>";
+            key = "gt";
+          }
+          # debugger keybindings
+          {
+            action = "<cmd>:lua require(\"dapui\").toggle()<cr>";
+            key = "<leader>dt";
+          }
+          {
+            action = "<cmd>DapToggleBreakpoint<cr>";
+            key = "<leader>db";
+          }
+          {
+            action = "<cmd>DapContinue<cr>";
+            key = "<leader>dc";
           }
         ];
         plugins = {
@@ -162,19 +208,42 @@ in {
               notify_on_error = true;
               formatters_by_ft = {
                 nix = ["alejandra"];
+                python = ["ruff_format"];
               };
             };
           };
+          dap.enable = true;
+          dap-python = {
+            enable = true;
+            adapterPythonPath =
+              lib.getExe (pkgs.python3.withPackages (ps: [ps.debugpy]));
+          };
+          dap-ui.enable = true;
+          dap-virtual-text.enable = true;
           friendly-snippets.enable = true;
           fugitive.enable = true;
           gitsigns.enable = true;
           hardtime.enable = true;
           lsp = {
             enable = true;
+            inlayHints = true;
+            keymaps = {
+              normal = [
+                # LSP keybindings
+                {
+                  key = "K";
+                  lspBufAction = "hover";
+                }
+              ];
+            };
             servers = {
               lua_ls.enable = true;
-              pylsp.enable = true;
               nixd.enable = true;
+              pyright.enable = true;
+              ruff.enable = true;
+              sqls = {
+                enable = true;
+              };
               texlab.enable = true;
             };
           };
@@ -259,7 +328,7 @@ in {
           tmux-navigator.enable = true;
           treesitter = {
             enable = true;
-            folding = true;
+            folding.enable = true;
             # settings.indent = true;
             settings.highlight.enable = true;
           };
@@ -268,6 +337,7 @@ in {
           vimtex = {
             enable = true;
             texlivePackage = stablePkgs.texlive.combined.scheme-full;
+            settings.view_method = "zathura";
           };
           vimux.enable = true;
           web-devicons.enable = true;
@@ -295,7 +365,7 @@ in {
               sha256 = "ls3+V51l6xq16ZIf5N9THsQ/rIgK+OXovND8//avs/0=";
             };
           }
-          UltiSnips
+          ultisnips
         ];
       };
     };
