@@ -21,9 +21,7 @@ in {
         # yank
         logging
         nord
-        vim-tmux-navigator
-        # resurrect
-        # continuum
+        vim-tmux-navigator # resurrect continuum
       ];
       # extraConfig = ''
       # '';
