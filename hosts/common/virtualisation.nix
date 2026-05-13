@@ -34,14 +34,25 @@
     mesa
   ];
 
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
+   virtualisation = {
+     libvirtd = {
+       enable = true;
+       qemu = {
+         swtpm.enable = true;
+       };
+     };
+     spiceUSBRedirection.enable = true;
+   };
+
+   # Configure QEMU bridge helper ACL
+   environment.etc."qemu/bridge.conf".text = ''
+     allow virbr0
+     allow virbr1
+     allow virbr2
+     allow vmnett
+   '';
+
+   # Run QEMU as root to allow bridged networking access
+   virtualisation.libvirtd.qemuRunAsRoot = true;
   services.spice-vdagentd.enable = true;
 }
