@@ -21,6 +21,7 @@
       plex.enable = true;
       hyprland.enable = true;
       latex.enable = true;
+      office.enable = true;
       wireshark.enable = true;
     };
   };
@@ -34,7 +35,6 @@
   };
   programs.sqls.enable = true;
   home.packages = with pkgs; [
-    mysql80
     dbeaver-bin
     opencode
     tradingview
