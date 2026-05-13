@@ -91,7 +91,7 @@
     NIXOS_OZONE_WL = "1";
   };
   # Enable the X11 windowing system.
-  # services.xserver.enable = true; - removed
+  # services.xserver.enable = true;
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
@@ -158,11 +158,22 @@
 
   # Install firefox.
 
+  services.flatpak.enable = true;
   services.jotta-cli = {
     enable = true;
   };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Disable openldap tests (they timeout on i686)
+  nixpkgs.overlays = [
+    (_: prev: {
+      openldap = prev.openldap.overrideAttrs {
+        doCheck = !prev.stdenv.hostPlatform.isi686;
+      };
+    })
+  ];
+
   #set up virtualization
   users.extraGroups.vmware.members = ["fredrik"];
   users.extraGroups.vboxusers.members = ["fredrik"];
@@ -202,8 +213,9 @@
     gnupg
     libxfs
     libxml2
+    libsecret
     lutris
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     vulkan-tools
     dxvk
@@ -242,6 +254,9 @@
   hardware.xone.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  programs.thunar.enable = true;
+  services.tumbler.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   programs.xwayland.enable = true;
   programs.appimage = {
     enable = true;
