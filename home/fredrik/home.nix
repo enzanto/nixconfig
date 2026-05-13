@@ -50,6 +50,11 @@
     insomnia
   ];
 
+  # Add ~/.local/bin to PATH (standard XDG location for user executables)
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
+  ];
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
