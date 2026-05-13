@@ -144,7 +144,7 @@ in {
       };
     };
     services = {
-      hyprpaper = hostConfig.hyprpaper;
+      hyprpaper = hostConfig.hyprpaper or { enable = false; };
       hypridle = {
         enable = true;
         settings = {
