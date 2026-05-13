@@ -30,6 +30,7 @@
     ripgrep
     sshfs
     timeshift
+    wget
     wl-clipboard
     zip
   ];
