@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
-    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
   };
@@ -32,7 +32,7 @@
     nixpkgs,
     sops-nix,
     nixpkgs-stable,
-    hyprland,
+    # hyprland,
     nixvim,
     ...
   } @ inputs: let
