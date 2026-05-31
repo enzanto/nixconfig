@@ -22,7 +22,8 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      package = pkgs.hyprland;
       extraConfig = hostConfig.extraConfig or "";
       settings = {
         "$mod" = "SUPER";
@@ -144,7 +145,7 @@ in {
       };
     };
     services = {
-      hyprpaper = hostConfig.hyprpaper or { enable = false; };
+      hyprpaper = hostConfig.hyprpaper or {enable = false;};
       hypridle = {
         enable = true;
         settings = {
