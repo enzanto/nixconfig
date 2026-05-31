@@ -113,7 +113,7 @@
   # Enables wireshark
   users.extraGroups.wireshark.members = ["fredrik"];
   programs.wireshark.enable = true;
-  # ── System packages ───────────────────────────────────────────────────
+   # ── System packages ───────────────────────────────────────────────────
   environment.systemPackages = with pkgs; [
     # Core utilities
     vim
@@ -131,6 +131,10 @@
 
     # Docker and container tools
     docker-compose
+
+    # OpenCL support for CPU-based acceleration (hashcat, etc.)
+    ocl-icd        # OpenCL ICD loader (discovers available OpenCL devices)
+    pocl           # Portable Computing Language (CPU-based OpenCL implementation)
   ];
 
   # ── Misc ──────────────────────────────────────────────────────────────

@@ -14,5 +14,6 @@
   home.packages = with pkgs; [
     obsidian # Note-taking for research
     inetutils
+    hping
   ];
 }

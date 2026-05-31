@@ -11,6 +11,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      steam-run # dirty hack to run nessus
       amass # Subdomain enumeration
       angryipscanner
       dnsenum # DNS enumeration

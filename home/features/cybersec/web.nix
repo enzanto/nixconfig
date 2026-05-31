@@ -14,6 +14,7 @@ in {
       sqlmap # SQL injection scanner
       nikto # Web server scanner
       ffuf # Fast web fuzzer
+      wfuzz # Web parameter fuzzer
       gobuster # Directory/DNS brute-forcer
       dirb # Web content scanner
       feroxbuster # Recursive content discovery
