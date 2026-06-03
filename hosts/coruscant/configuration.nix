@@ -30,6 +30,7 @@
     enable = true;
     settings.Resolve = {
       Domains = ["nerdiverset.no"];
+      DNS = ["192.168.10.100"];
     };
     # extraConfig = ''
     #   DNS=192.168.10.100
@@ -207,6 +208,7 @@
     #  wget
     #vmware-workstation
     # ciscoPacketTracer8
+    cisco-packet-tracer_9
     docker-buildx
     freerdp
     gcc
