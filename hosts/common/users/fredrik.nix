@@ -29,5 +29,11 @@
   ];
 
   home-manager.users.fredrik =
-    import ../../../home/fredrik/${config.networking.hostName}.nix;
+    let
+      hm_file = ../../../home/fredrik/${config.networking.hostName}.nix;
+    in
+    if builtins.pathExists hm_file then
+      import hm_file
+    else
+      {};
 }

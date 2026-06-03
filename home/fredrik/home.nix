@@ -8,9 +8,6 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.sops-nix.homeManagerModules.sops
-  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = lib.mkDefault "fredrik";
@@ -23,7 +20,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = lib.mkDefault "24.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -46,8 +43,6 @@
     # '')
     git
     # rofi-wayland
-    vlc
-    insomnia
   ];
 
   # Add ~/.local/bin to PATH (standard XDG location for user executables)
@@ -86,16 +81,6 @@
   #  /etc/profiles/per-user/m3tam3re/etc/profile.d/hm-session-vars.sh
   #
 
-  sops = {
-    age.keyFile = "/home/fredrik/.config/sops/age/keys.txt";
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    defaultSymlinkPath = "/run/user/1000/secrets";
-    defaultSecretsMountPoint = "/run/user/1000/secrets.d";
-
-    secrets.open_ai = {
-      path = "${config.sops.defaultSymlinkPath}/open_ai";
-    };
-  };
   home.sessionVariables = {
     EDITOR = "nvim";
   };

@@ -4,7 +4,11 @@
     ../common
     ../features/cli
     ../features/desktop
+    ../features/cybersec
+    ../features/security
   ];
+
+  features.security.sops.enable = true;
 
   features = {
     cli = {
@@ -23,6 +27,9 @@
       latex.enable = true;
       office.enable = true;
       wireshark.enable = true;
+    };
+    cybersec = {
+      forensics.enable = true;
     };
   };
   programs.bash = {

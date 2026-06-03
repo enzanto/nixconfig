@@ -12,6 +12,7 @@
     firefox
     kdePackages.okular
     obsidian
+    vlc
     qalculate-qt
     yubioath-flutter
   ];

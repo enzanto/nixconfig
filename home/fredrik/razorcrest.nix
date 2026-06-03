@@ -8,7 +8,10 @@
     ../common
     ../features/cli
     ../features/desktop
+    ../features/security
   ];
+
+  features.security.sops.enable = true;
 
   features = {
     cli = {
