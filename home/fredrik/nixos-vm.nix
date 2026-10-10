@@ -48,13 +48,13 @@
     };
     cybersec = {
       scanning.enable = true;
-      cracking.enable = true;
-      web.enable = true;
-      exploitation.enable = true;
+      cracking.enable = false; # seclists, rockyou, hashcat...
+      web.enable = false; # burpsuite, sqlmap, gobuster...
+      exploitation.enable = false; # metasploit, SET...
       wireless.enable = true;
       networking.enable = true;
       osint.enable = true;
-      forensics.enable = true;
+      forensics.enable = false; # autopsy, ghidra, volatility3...
     };
   };
 }
