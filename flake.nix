@@ -24,6 +24,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    # ai-microvm.url = "git+file:///home/fredrik/projects/ai-microvm";
   };
 
   outputs = {
@@ -96,6 +97,16 @@
         modules = [
           ./hosts/coruscant
           sops-nix.nixosModules.sops
+          # inputs.ai-microvm.nixosModules.default
+          # {
+          #   ai-microvm = {
+          #     enable = true;
+          #     externalInterface = "enp5s0";
+          #     allowedDomains = [
+          #       "api.anthropic.com"
+          #     ];
+          #   };
+          # }
         ];
       };
       razorcrest = nixpkgs.lib.nixosSystem {
