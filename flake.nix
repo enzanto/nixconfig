@@ -46,13 +46,46 @@
     ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    packages =
-      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (
+      system:
+        (import ./pkgs nixpkgs.legacyPackages.${system})
+        // nixpkgs.lib.optionalAttrs (system == "x86_64-linux") {
+          nixos-vm = self.nixosConfigurations.nixos-vm.config.system.build.images.qemu-efi;
+          proxmox-vm = self.nixosConfigurations.proxmox-vm.config.system.build.images.proxmox;
+          test-vm = self.nixosConfigurations.test-vm.config.system.build.images.proxmox;
+          web-gateway = self.nixosConfigurations.web-gateway.config.system.build.images.proxmox;
+          root-ca = self.nixosConfigurations.root-ca.config.system.build.images.proxmox;
+        }
+    );
     overlays = import ./overlays {inherit inputs;};
     nixosConfigurations = {
       nixos-vm = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/nixos-vm];
+      };
+      proxmox-vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/proxmox-vm
+          sops-nix.nixosModules.sops
+        ];
+      };
+      test-vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/test-vm
+        ];
+      };
+      web-gateway = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/web-gateway
+          sops-nix.nixosModules.sops
+        ];
+      };
+      root-ca = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/root-ca];
       };
       serenity = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -87,18 +120,12 @@
       "fredrik@coruscant" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/fredrik/coruscant.nix
-          inputs.sops-nix.homeManagerModules.sops
-        ];
+        modules = [./home/fredrik/coruscant.nix];
       };
       "fredrik@razorcrest" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/fredrik/razorcrest.nix
-          inputs.sops-nix.homeManagerModules.sops
-        ];
+        modules = [./home/fredrik/razorcrest.nix];
       };
     };
     devShells = forAllSystems (system: let
