@@ -30,7 +30,7 @@
     enable = true;
     settings.Resolve = {
       Domains = ["nerdiverset.no"];
-      DNS = ["192.168.10.100"];
+      DNS = ["10.1.1.140"];
     };
     # extraConfig = ''
     #   DNS=192.168.10.100
