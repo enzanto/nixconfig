@@ -16,7 +16,7 @@ in
         john           # John the Ripper password cracker
         hashcat        # GPU password cracker
         hydra          # Network login brute-forcer
-        wordlists      # SecLists wordlists collection
+        # wordlists    # SecLists wordlists collection (broken in python 3.14 - pull via wfuzz)
         seclists       # Security assessment wordlists (passwords, usernames, web shells)
         rockyou        # Famous rockyou.txt wordlist for brute force attacks
         crunch         # Wordlist generator
