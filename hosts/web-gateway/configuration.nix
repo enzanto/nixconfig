@@ -10,6 +10,7 @@
 
   # Hostname
   networking.hostName = lib.mkOverride 40 "web-gateway";
+  networking.extraHosts = "127.0.0.1 ca.nerdiverset.no";
 
   # Locale
   console.keyMap = "no";
@@ -63,6 +64,12 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  # Root CA cert for tiered mTLS access (kept for reference)
+  environment.etc."caddy/root_ca.crt".source = ./root_ca.crt;
+
+  # Full CA chain (root + intermediate) for client cert verification
+  environment.etc."caddy/ca-chain.crt".source = ./ca-chain.crt;
+
   # Caddy with Coraza WAF + Cloudflare DNS
   services.caddy = {
     enable = true;
@@ -71,30 +78,13 @@
         "github.com/corazawaf/coraza-caddy/v2@v2.5.0"
         "github.com/caddy-dns/cloudflare@v0.2.4"
       ];
-      hash = "sha256-qpLrJ4qwidQV3DHb1iRNXoUj9YzClT8wfd+NPxMMwzA=";
+      hash = "sha256-rVGtlxygIQ6KZKGDh2Qq0DiL7oofwbMDQVadps+g/uE=";
     };
     openFirewall = true;
 
     globalConfig = ''
       order coraza_waf first
     '';
-
-    virtualHosts = {
-      ":80" = {
-        extraConfig = ''
-          coraza_waf {
-            load_owasp_crs
-            directives `
-              SecRuleEngine On
-              Include @coraza.conf-recommended
-              Include @crs-setup.conf.example
-              Include @owasp_crs/*.conf
-            `
-          }
-          respond "web-gateway — Caddy + Coraza"
-        '';
-      };
-    };
   };
 
   # Docker
