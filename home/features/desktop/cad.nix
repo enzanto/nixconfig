@@ -11,8 +11,8 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      bambu-studio
-      blender
+      # bambu-studio
+      # blender
       # freecad
       (pkgs.writeShellScriptBin "freecad" ''
         export QT_QPA_PLATFORM=xcb

@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with stablePkgs; [
       texliveFull
+      python3Packages.pygments
     ];
   };
 }

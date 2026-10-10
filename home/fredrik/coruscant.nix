@@ -30,6 +30,7 @@
     };
     cybersec = {
       forensics.enable = true;
+      web.enable = true;
     };
   };
   programs.bash = {
@@ -45,8 +46,9 @@
     dbeaver-bin
     opencode
     tradingview
-    # azure-cli
     (azure-cli.withExtensions [azure-cli.extensions.azure-firewall])
-    # jabref - Commented out due to build error.
+    # jabref
+    claude-code
+    mangohud
   ];
 }

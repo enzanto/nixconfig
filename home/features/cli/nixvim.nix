@@ -191,7 +191,7 @@ in {
               {name = "path";}
               {name = "buffer";}
               {name = "luasnip";}
-              {name = "spell";}
+              # {name = "spell";}
             ];
           };
           cmp-buffer.enable = true;
@@ -223,19 +223,19 @@ in {
           friendly-snippets.enable = true;
           fugitive.enable = true;
           gitsigns.enable = true;
-          hardtime.enable = true;
+          hardtime.enable = false;
           lsp = {
             enable = true;
             inlayHints = true;
-            keymaps = {
-              normal = [
-                # LSP keybindings
-                {
-                  key = "K";
-                  lspBufAction = "hover";
-                }
-              ];
-            };
+            # keymaps = {
+            #   normal = [
+            #     # LSP keybindings
+            #     {
+            #       key = "K";
+            #       lspBufAction = "hover";
+            #     }
+            #   ];
+            # };
             servers = {
               lua_ls.enable = true;
               nixd.enable = true;
@@ -337,7 +337,18 @@ in {
           vimtex = {
             enable = true;
             texlivePackage = stablePkgs.texlive.combined.scheme-full;
-            settings.view_method = "zathura";
+            settings = {
+              view_method = "zathura";
+              compiler_latexmk = {
+                options = [
+                  "-verbose"
+                  "-file-line-error"
+                  "-synctex=1"
+                  "-interaction=nonstopmode"
+                  "-shell-escape"
+                ];
+              };
+            };
           };
           vimux.enable = true;
           web-devicons.enable = true;
@@ -348,23 +359,23 @@ in {
             plugin = nvim-comment;
             config = ''lua require("nvim_comment").setup()'';
           }
-          {
-            #semshi python highlighter
-            plugin = pkgs.fetchFromGitHub {
-              owner = "wookayin";
-              repo = "semshi";
-              rev = "v0.3.0";
-              sha256 = "sha256-gQy8rQBTzODp8OfnHdggxSq275/9T8feJAkWzH+CdvU=";
-            };
-          }
-          {
-            plugin = pkgs.fetchFromGitHub {
-              owner = "carlsmedstad";
-              repo = "vim-bicep";
-              rev = "8172cf773d52302d6c9d663487f56630302b2fda";
-              sha256 = "ls3+V51l6xq16ZIf5N9THsQ/rIgK+OXovND8//avs/0=";
-            };
-          }
+          # {
+          #   #semshi python highlighter
+          #   plugin = pkgs.fetchFromGitHub {
+          #     owner = "wookayin";
+          #     repo = "semshi";
+          #     rev = "v0.3.0";
+          #     sha256 = "sha256-gQy8rQBTzODp8OfnHdggxSq275/9T8feJAkWzH+CdvU=";
+          #   };
+          # }
+          # {
+          #   plugin = pkgs.fetchFromGitHub {
+          #     owner = "carlsmedstad";
+          #     repo = "vim-bicep";
+          #     rev = "8172cf773d52302d6c9d663487f56630302b2fda";
+          #     sha256 = "ls3+V51l6xq16ZIf5N9THsQ/rIgK+OXovND8//avs/0=";
+          #   };
+          # }
           ultisnips
         ];
       };
