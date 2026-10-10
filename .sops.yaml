@@ -1,9 +1,11 @@
 keys:
   - &coruscant age1zltg27lvxzl5t7kurrzczpahzljpav9gj554azymkwl0hym5hp5q95ny4h
   - &razorcrest age184j8nwyc0kt9f8gqs92apgf8z66ttdhpatv9yk2yzk70fuvndckquk6zt8
+  - &web-gateway age1mj7zmg5ef2y4hc4cpuqr6pzef2z9zdwaww2rgzg8jxskrrzzaqfqldt7m8
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *coruscant
       - *razorcrest
+      - *web-gateway

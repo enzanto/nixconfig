@@ -106,14 +106,22 @@
     vim
     curl
     git
+    step-cli
   ];
 
-  # Wazuh Agent
-  services.wazuh-agent = {
-    enable = true;
-    manager.host = "192.168.10.168";
-    package = inputs.wazuh.packages.${pkgs.system}.wazuh-agent;
+  # ── SOPS Secrets ─────────────────────────────────────────────────────
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.age.keyFile = "/home/fredrik/.config/sops/age/keys.txt";
+
+  sops.secrets.cloudflare_api_token = {
+    owner = "caddy";
+    group = "caddy";
+    restartUnits = ["caddy.service"];
   };
+
+  systemd.services.caddy.serviceConfig.EnvironmentFile = [config.sops.secrets.cloudflare_api_token.path];
+  systemd.services.caddy.after = ["sops-nix.service"];
+  systemd.services.caddy.wants = ["sops-nix.service"];
 
   # System State Version
   system.stateVersion = "24.11";
