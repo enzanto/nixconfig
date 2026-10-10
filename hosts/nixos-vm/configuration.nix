@@ -1,18 +1,31 @@
 {
   config,
   pkgs,
-  modulesPath,
   ...
 }: {
-  imports = [
-    "${modulesPath}/virtualisation/qemu-vm.nix"
-  ];
+  # ── Platform ──────────────────────────────────────────────────────────
+  nixpkgs.hostPlatform = "x86_64-linux";
+
+  # ── Disk ───────────────────────────────────────────────────────────────
+  virtualisation.diskSize = 24576; # 24 GiB (lean trimmed closure; grows to virt-manager disk via growPartition/autoResize)
+
   # ── Boot ──────────────────────────────────────────────────────────────
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.growPartition = true; # grow the image to the virt-manager disk on first boot
 
-  # ── Platform ──────────────────────────────────────────────────────────
-  nixpkgs.hostPlatform = "x86_64-linux";
+  # ── Filesystems (match the qemu-efi image layout) ─────────────────────
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/nixos";
+      autoResize = true;
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-label/ESP";
+      fsType = "vfat";
+    };
+  };
 
   # ── Networking ────────────────────────────────────────────────────────
   networking.hostName = "nixos-vm";
@@ -21,6 +34,13 @@
   systemd.network = {
     enable = true;
     networks = {
+      # Primary NIC - DHCP (virt-manager default network / LAN)
+      "05-eth0" = {
+        matchConfig.Name = "eth0";
+        networkConfig = {
+          DHCP = "yes";
+        };
+      };
       # Second NIC (virbr1) - DHCP on isolated network
       "20-eth1" = {
         matchConfig.Name = "eth1";
@@ -55,29 +75,6 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
-  };
-
-  # ── QEMU/VM settings ─────────────────────────────────────────────────
-  virtualisation = {
-    memorySize = 8192; # 8 GB RAM
-    cores = 4;
-    diskSize = 40960; # 40 GB disk
-    graphics = true;
-    resolution = {
-      x = 1920;
-      y = 1080;
-    };
-    qemu.options = [
-      "-vga qxl"
-      "-spice port=5999,disable-ticketing=on"
-      "-device virtio-serial"
-      "-chardev spicevmc,id=vdagent,name=vdagent"
-      "-device virtserialport,chardev=vdagent,name=com.redhat.spice.0"
-      "-netdev"
-      "bridge,id=hostnet1,br=virbr1"
-      "-device"
-      "virtio-net-pci,netdev=hostnet1,mac=52:54:00:6e:a2:f7"
-    ];
   };
 
   # ── Guest integration ─────────────────────────────────────────────────

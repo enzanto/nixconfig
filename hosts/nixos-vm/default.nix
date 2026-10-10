@@ -1,6 +1,6 @@
-# QEMU VM - build and run with:
-#   nix build .#nixosConfigurations.nixos-vm.config.system.build.vm
-#   ./result/bin/run-nixos-vm-vm
+# QEMU VM - build the importable qcow2 image with:
+#   nix build .#nixos-vm
+#   # result/image.qcow2 -> import into virt-manager as UEFI VM
 {
   imports = [../common ./configuration.nix];
 }
