@@ -44,24 +44,26 @@
         matchConfig.Name = "vmnett";
         networkConfig = {
           DHCP = "no"; # leave this unmanaged, router will handle DHCP
-          Address = ["10.50.50.254/24"];
+          Address = ["10.0.0.10/24"];
+          DNS = "10.1.1.140";
+          Domains = "~test.nerdiverset.no";
         };
         routes = [
           {
             Gateway = "0.0.0.0";
-            Destination = "10.50.50.0/24";
+            Destination = "10.0.0.0/24";
             Table = 200;
           }
           {
             Destination = "0.0.0.0/0";
-            Gateway = "10.50.50.1"; # your router on VLAN 2
+            Gateway = "10.0.0.1"; # your router on VLAN 2
             Table = 200;
           }
         ];
         routingPolicyRules = [
           {
             Priority = 10000;
-            From = "10.50.50.0/24";
+            From = "10.0.0.0/24";
             Table = 200;
           }
         ];

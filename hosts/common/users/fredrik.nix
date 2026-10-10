@@ -30,10 +30,13 @@
 
   home-manager.users.fredrik =
     let
-      hm_file = ../../../home/fredrik/${config.networking.hostName}.nix;
+      hostName = config.networking.hostName;
+      hm_file = ../../../home/fredrik/${hostName}.nix;
     in
-    if builtins.pathExists hm_file then
+    if hostName == "" then
+      abort "networking.hostName is empty — cannot resolve HM config at home/fredrik/<hostname>.nix. Either set networking.hostName or remove hostname-based HM import."
+    else if builtins.pathExists hm_file then
       import hm_file
     else
-      {};
+      abort "HM config not found at ${hm_file}. Create home/fredrik/${hostName}.nix or fix the hostname.";
 }
