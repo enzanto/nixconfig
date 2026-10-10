@@ -180,10 +180,10 @@
   users.extraGroups.vboxusers.members = ["fredrik"];
   users.extraGroups.wireshark.members = ["fredrik"];
   programs.wireshark.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.dragAndDrop = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.guest.enable = true;
+  # virtualisation.virtualbox.guest.dragAndDrop = true;
   virtualisation.docker = {
     enable = true;
     package = pkgs.docker.override {buildxSupport = true;};
@@ -207,10 +207,10 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     #vmware-workstation
-    # ciscoPacketTracer8
-    cisco-packet-tracer_9
+    # cisco-packet-tracer_9
     docker-buildx
     freerdp
+    nfs-utils
     gcc
     gnupg
     libxfs
@@ -243,6 +243,7 @@
     # test to make kvm use 3d accelerations
     mesa
     libglvnd
+    xrandr
     #test
     libtommath
     system-config-printer
@@ -312,10 +313,10 @@
   services.blueman.enable = true;
   services.getty.autologinUser = "fredrik";
   # Local LLM
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   package = pkgs.ollama-cuda;
+  # };
   # services.open-webui.enable = true;
 
   # Enable avahi for printer discovery
