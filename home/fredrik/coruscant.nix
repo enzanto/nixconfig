@@ -46,7 +46,6 @@
     dbeaver-bin
     opencode
     tradingview
-    (azure-cli.withExtensions [azure-cli.extensions.azure-firewall])
     # jabref
     claude-code
     mangohud
