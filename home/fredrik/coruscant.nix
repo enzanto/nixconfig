@@ -20,7 +20,7 @@
       tmux.enable = true;
     };
     desktop = {
-      cad.enable = true;
+      cad.enable = false;
       vscode.enable = false;
       plex.enable = true;
       hyprland.enable = true;
@@ -37,9 +37,9 @@
   programs.bash = {
     enable = true;
     profileExtra = ''
-      if [[ $(tty) == /dev/tty1 ]]; then
-        exec start-hyprland
-      fi
+        if [[ $(tty) == /dev/tty1 ]]; then
+      sway
+        fi
     '';
   };
   programs.sqls.enable = true;

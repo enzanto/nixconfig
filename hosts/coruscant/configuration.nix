@@ -270,7 +270,7 @@
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono
   ];
-  hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
   hardware.xone.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
