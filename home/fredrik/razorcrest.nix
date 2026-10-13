@@ -26,6 +26,7 @@
       vscode.enable = false;
       plex.enable = true;
       hyprland.enable = true;
+      sway.enable = true;
       latex.enable = true;
       wireshark.enable = true;
     };

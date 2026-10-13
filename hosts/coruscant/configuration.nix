@@ -105,6 +105,23 @@
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
   programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
+  programs.sway = {
+    enable = true; # also sets up swaylock PAM, polkit and xdg-desktop-portal-wlr
+    package = pkgs.swayfx;
+    wrapperFeatures.gtk = true;
+    extraPackages = []; # swaylock(-effects), swayidle, grimshot etc. come from home-manager
+    extraOptions = ["--unsupported-gpu"]; # proprietary NVIDIA driver
+    extraSessionCommands = ''
+      export GBM_BACKEND=nvidia-drm
+      export LIBVA_DRIVER_NAME=nvidia
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+      export __GL_GSYNC_ALLOWED=1
+      export NVD_BACKEND=direct
+      export WLR_NO_HARDWARE_CURSORS=1
+      # export WLR_DRM_NO_ATOMIC=1 # was set for Hyprland, try without first
+      # export WLR_RENDERER=vulkan # try if there is flicker/tearing
+    '';
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -286,6 +303,11 @@
       config = {
         common.default = ["gtk"];
         hyprland.default = ["gtk" "hyprland"];
+        sway = {
+          default = ["gtk"];
+          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+        };
       };
       configPackages = [
         pkgs.gnome-session

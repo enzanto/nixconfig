@@ -58,6 +58,12 @@
   #   packages = with pkgs; [];
   # };
   programs.hyprland.enable = true;
+  programs.sway = {
+    enable = true; # also sets up swaylock PAM, polkit and xdg-desktop-portal-wlr
+    package = pkgs.swayfx;
+    wrapperFeatures.gtk = true;
+    extraPackages = []; # swaylock(-effects), swayidle, grimshot etc. come from home-manager
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true; #for vscode server
@@ -111,6 +117,11 @@
     pkgs.kdePackages.xdg-desktop-portal-kde
     pkgs.xdg-desktop-portal-gtk
   ];
+  xdg.portal.config.sway = {
+    default = ["gtk"];
+    "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+    "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

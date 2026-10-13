@@ -1,4 +1,19 @@
-{
+# wm: "hyprland" or "sway"
+{wm ? "hyprland"}: let
+  # output -> workspaces, which is what hyprland/workspaces expects
+  persistentWorkspaces = {
+    "DP-2" = [1 2 3 4 5 6 7 8];
+    "HDMI-A-2" = [9 10 11 12 13 14 15 16];
+    "HDMI-A-1" = [17 18 19 20];
+  };
+  # sway/workspaces expects the inverse: workspace name -> outputs
+  persistentWorkspacesSway = builtins.listToAttrs (builtins.concatMap (output:
+    map (n: {
+      name = toString n;
+      value = [output];
+    })
+    persistentWorkspaces.${output}) (builtins.attrNames persistentWorkspaces));
+in {
   programs.waybar = {
     enable = true;
     style = ./style.css;
@@ -7,39 +22,51 @@
         layer = "top";
         position = "top";
         height = 30;
-        modules-left = ["hyprland/workspaces"];
-        modules-center = ["hyprland/window"];
+        modules-left =
+          ["${wm}/workspaces"]
+          ++ (
+            if wm == "sway"
+            then ["sway/mode"]
+            else []
+          );
+        modules-center = ["${wm}/window"];
         modules-right = ["custom/weather" "pulseaudio" "battery" "clock" "network" "bluetooth" "tray"];
-        "hyprland/workspaces" = {
-          disable-scroll = true;
-          show-special = true;
-          special-visible-only = true;
-          all-outputs = false;
-          format = "{icon}";
-          format-icons = {
-            "1" = "";
-            "2" = "";
-            "3" = "📓";
-            "4" = "🎥";
-            "5" = "📨";
-            # "3" = "";
-            # "4" = "";
-            # "5" = "";
-            # "6" = "";
-            # "7" = "";
-            "6" = "🎓";
-            "7" = "🎮";
-            "8" = "";
-            "9" = "📈";
-            "magic" = "";
-          };
+        "${wm}/workspaces" =
+          {
+            disable-scroll = true;
+            all-outputs = false;
+            format = "{icon}";
+            format-icons = {
+              "1" = "";
+              "2" = "";
+              "3" = "📓";
+              "4" = "🎥";
+              "5" = "📨";
+              # "3" = "";
+              # "4" = "";
+              # "5" = "";
+              # "6" = "";
+              # "7" = "";
+              "6" = "🎓";
+              "7" = "🎮";
+              "8" = "";
+              "9" = "📈";
+              "magic" = "";
+            };
 
-          persistent-workspaces = {
-            "DP-2" = [1 2 3 4 5 6 7 8];
-            "HDMI-A-2" = [9 10 11 12 13 14 15 16];
-            "HDMI-A-1" = [17 18 19 20];
-          };
-        };
+            persistent-workspaces =
+              if wm == "sway"
+              then persistentWorkspacesSway
+              else persistentWorkspaces;
+          }
+          // (
+            if wm == "hyprland"
+            then {
+              show-special = true;
+              special-visible-only = true;
+            }
+            else {}
+          );
 
         "custom/weather" = {
           format = " {} ";

@@ -14,7 +14,7 @@ with lib; let
     if builtins.pathExists hostConfigPath
     then import hostConfigPath
     else {};
-  waybarConf = import ./waybar/default.nix;
+  waybarConf = import ./waybar/default.nix {wm = "hyprland";};
 in {
   options.features.desktop.hyprland.enable = mkEnableOption "enable hyprland";
 
@@ -146,9 +146,11 @@ in {
       };
     };
     services = {
-      hyprpaper = hostConfig.hyprpaper or {enable = false;};
+      # Pinned to the Hyprland session so they don't also start under sway
+      hyprpaper = (hostConfig.hyprpaper or {enable = false;}) // {systemdTarget = "hyprland-session.target";};
       hypridle = {
         enable = true;
+        systemdTarget = "hyprland-session.target";
         settings = {
           general = {
             after_sleep_cmd = "hyprctl dispatch dpms on";
@@ -207,40 +209,12 @@ in {
       };
     };
     home.packages = with pkgs; [
-      brightnessctl
-      alacritty
       hypridle
       hyprlock
       hyprpaper
       hyprshot
-      satty
-      swappy
-      # xfce.thunar
-      waypaper
-      #waybar
-      rofi-bluetooth
-      rofi-systemd
-      # rofi-wayland
     ];
     programs.waybar = waybarConf.programs.waybar; # {
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi;
-      extraConfig = {
-        modi = "drun,run,window,calc";
-        drun-display-format = "{icon} {name}";
-        display-drun = "🕵 Application";
-        show-icons = true;
-      };
-      plugins = with pkgs; [
-        rofi-calc
-        rofi-emoji
-        rofi-power-menu
-        rofi-top
-        # rofi-bluetooth
-      ];
-      theme = "rounded-nord-dark";
-    };
     #   enable = true;
     #   systemd.enable = true;
 

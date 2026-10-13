@@ -20,10 +20,13 @@
     color: #d8dee9;
     padding: 0 10px;
   }
-  #workspaces button.active label {
+  /* .active = hyprland, .focused = sway */
+  #workspaces button.active label,
+  #workspaces button.focused label {
     /* color: #1d2021; */
   }
-  #workspaces button.active {
+  #workspaces button.active,
+  #workspaces button.focused {
     /* background: #d65d0e; */
     background: #88c0d0;
   }
